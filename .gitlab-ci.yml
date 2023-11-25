@@ -10,7 +10,7 @@ build:
     - npm run build
   artifacts:
     paths:
-      - build
+      - dist
 
 # test:
 #   stage: test
@@ -27,8 +27,8 @@ pages:
     - build
   script:
     - rm -rf public
-    - cp build/index.html build/404.html
-    - mv build public
+    - cp dist/index.html dist/404.html
+    - mv dist public
   artifacts:
     paths:
       - public
