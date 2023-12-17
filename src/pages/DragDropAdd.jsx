@@ -1,121 +1,56 @@
-// src/pages/DragDropAdd.js
-import React, { useState, useCallback } from 'react';
-import { useDrag, useDrop } from 'react-dnd';
-import { ItemTypes } from './constants/ItemTypes';
+// src/pages/DragDropAdd.jsx
 
-const Fruit = ({ name }) => {
-  const [{ isDragging }, drag] = useDrag({
-    type: ItemTypes.FRUIT,
-    item: { name },
-    collect: (monitor) => ({
-      isDragging: !!monitor.isDragging(),
-    }),
-  });
-
-  return (
-    <div
-      ref={drag}
-      style={{
-        opacity: isDragging ? 0.5 : 1,
-        fontSize: '24px',
-        fontWeight: 'bold',
-        cursor: 'move',
-        display: 'inline-block',
-        marginRight: '10px',
-      }}
-    >
-      🍎 {name}
-    </div>
-  );
-};
-
-const Basket = ({ fruits, onDrop }) => {
-  const [, drop] = useDrop({
-    accept: ItemTypes.FRUIT,
-    drop: (item) => onDrop(item.name),
-  });
-
-  return (
-    <div
-      ref={drop}
-      style={{
-        border: '2px solid #000',
-        padding: '10px',
-        marginTop: '20px',
-        display: 'inline-block',
-      }}
-    >
-      Basket: {fruits.join(' + ')}
-    </div>
-  );
-};
-
-const getRandomNumber = () => Math.floor(Math.random() * 10) + 1;
+import React, { useState } from 'react';
 
 const DragDropAdd = () => {
-  const [numbers, setNumbers] = useState([getRandomNumber(), getRandomNumber()]);
-  const [fruits, setFruits] = useState([]);
-  const [userGuess, setUserGuess] = useState('');
-  const [gameOver, setGameOver] = useState(false);
+  const imageUrls = [
+    'https://purepng.com/public/uploads/large/purepng.com-red-appleapplemalus-domesticafruitdeliciousred-apple-170152716492043huf.png',
+    'https://www.pngall.com/wp-content/uploads/2016/05/Orange-Free-PNG-Image.png',
+    'https://tse4.mm.bing.net/th?id=OIP.F5697DlI3BFmA8Ki4bed8wHaFc&pid=Api&P=0&h=180',
+    'https://freepngimg.com/download/cherry/34970-4-cherry-fruit-image.png',
+    'https://purepng.com/public/uploads/large/purepng.com-bananafruitsyellowfruit-981524754290sbcsq.png'
+    // Add more image URLs as needed
+  ];
 
-  const result = numbers.reduce((sum, num) => sum + num, 0);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-  const handleDrop = useCallback(
-    (fruit) => {
-      setFruits([...fruits, fruit]);
-    },
-    [fruits]
-  );
-
-  const resetGame = () => {
-    setNumbers([getRandomNumber(), getRandomNumber()]);
-    setFruits([]);
-    setUserGuess('');
-    setGameOver(false);
-  };
-
-  const handleSubmit = () => {
-    const userResult = fruits.reduce((sum, fruit) => sum + parseInt(fruit.replace('Fruit', '')), 0);
-
-    if (userResult === result) {
-      // Correct guess
-      setGameOver(false);
-    } else {
-      // Incorrect guess
-      setGameOver(true);
-    }
+  const handleNextImage = () => {
+    // Increment the index or loop back to the beginning if it exceeds the array length
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % imageUrls.length);
   };
 
   return (
     <div>
-      <h2>Drag and Drop Addition Game</h2>
-      <div>
-        {numbers.map((num, index) => (
-          <div key={index} style={{ display: 'inline-block', marginRight: '10px' }}>
-            {num}
-          </div>
-        ))}
-        <div style={{ display: 'inline-block', marginRight: '10px' }}> = </div>
+      <h1>DragDropAdd Page</h1>
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        {/* Left Box */}
+        <div style={{ border: '1px solid black', padding: '10px', width: '30%' }}>
+          <h2>Left Box</h2>
+          <img src={imageUrls[currentIndex]} alt={`Object ${currentIndex}`} style={{ width: '100%', height: 'auto' }} />
+          {/* Add content specific to the left box if needed */}
+        </div>
+
+        {/* Plus Sign */}
+        <div style={{width: '5%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <img src="https://cdn.onlinewebfonts.com/svg/img_25007.png" alt="Plus Sign" style={{ width: '100%', height: 'auto' }} />
+        </div>
+
+        {/* Right Box */}
+        <div style={{ border: '1px solid black', padding: '10px', width: '30%' }}>
+          <h2>Right Box</h2>
+          <img src={imageUrls[currentIndex]} alt={`Object ${currentIndex}`} style={{ width: '100%', height: 'auto' }} />
+          {/* Add content specific to the right box if needed */}
+        </div>
       </div>
-      <div>
-        {numbers.map((num, index) => (
-          <Fruit key={index} name={`Fruit${num}`} />
-        ))}
+
+      {/* Submit Button */}
+      <button onClick={handleNextImage}>Submit</button>
+
+      {/* Basket */}
+      <div style={{ border: '1px solid black', padding: '10px', marginTop: '20px' }}>
+        <h2>Basket</h2>
+        {/* Add content specific to the basket if needed */}
       </div>
-      <Basket fruits={fruits} onDrop={handleDrop} />
-      <div style={{ marginTop: '20px' }}>
-        <input
-          type="text"
-          value={userGuess}
-          onChange={(e) => setUserGuess(e.target.value)}
-          placeholder="Your guess"
-        />
-        <button onClick={handleSubmit}>Submit</button>
-      </div>
-      {gameOver && <p style={{ color: 'red' }}>Game Over! Incorrect guess.</p>}
-      <button onClick={resetGame} style={{ marginTop: '20px' }}>
-        Reset Game
-      </button>
     </div>
   );
 };

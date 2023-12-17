@@ -1,6 +1,6 @@
 // src/pages/AdditionPage.js
-import React from 'react';
 
+import './styles/DragDropAdd.css';
 function DivisionPage() {
   return (
     <div>

@@ -1,5 +1,4 @@
 // src/pages/AdditionPage.js
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './styles/Addition.css';
 function AdditionPage() {
