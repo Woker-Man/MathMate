@@ -1,4 +1,5 @@
 // src/App.js
+
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
 import AdditionPage from './pages/AdditionPage';
@@ -16,7 +17,7 @@ function App() {
 
   return (
     <DndProvider backend={HTML5Backend}>
-    <Router>
+      <Router>
         {showMathButtons && (
           <header className="App-header">
             <h1>Welcome to MathMate</h1>
@@ -65,24 +66,24 @@ function App() {
             <Route path="/multiplication" element={<MultiplicationPage />} />
             <Route path="/division" element={<DivisionPage />} />
             <Route path="/dragDropAdd" element={<DragDropAdd />} />
-             <Route path="/simpleAdd" element={<SimpleAdd />} />
+            <Route path="/simpleAdd" element={<SimpleAdd />} />
           </Routes>
         </main>
         <footer className="App-footer">
-        {!showMathButtons && (
-              <>
-                <Link
-                  to="/"
-                  className="btn btn-primary mx-4"
-                  onClick={() => setShowMathButtons(true)}
-                >
-               Back
-                </Link>
-              </>
-            )}
+          {!showMathButtons && (
+            <>
+              <Link
+                to="/"
+                className="btn btn-primary mx-4"
+                onClick={() => setShowMathButtons(true)}
+              >
+                Back
+              </Link>
+            </>
+          )}
           <p>&copy; 2023 MathMate. All rights reserved.</p>
         </footer>
-    </Router>
+      </Router>
     </DndProvider>
   );
 }
