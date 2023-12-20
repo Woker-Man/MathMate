@@ -1,4 +1,4 @@
-import { useSelector, useDispatch } from "react-redux"
+// import { useSelector, useDispatch } from "react-redux"
 import { Link } from "react-router-dom"
 
 const Footer = ()=> {
@@ -8,6 +8,7 @@ const Footer = ()=> {
               <Link
                 to="/"
                 className="btn btn-primary mx-4"
+                
               >
                 Back
               </Link>
