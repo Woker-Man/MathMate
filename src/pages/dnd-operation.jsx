@@ -43,11 +43,11 @@ const BasketSource = (props) => {
     return (
         <>
 
-            <div className="basket-source" onClickCapture={(e) => { e.preventDefault() }}>
+            <div className="basket-source">
                 {
                     Array.from({ length: props.num }, (_, i) => i + 1).map(() => {
                         return (
-                            <div key={nanoid()} draggable onDragStart={(e) => { handleOnDrag(e, "apple") }}>
+                            <div key={nanoid()} draggable onDragStart={(e) => { handleOnDrag(e, "apple")  } }  onTouchStart={(e)=>{handleOnDrag(e,"apple")}}>
                                 <img src={props.iconSrc} width={props.itemWidth} ></img>
                             </div>
                         )
@@ -78,7 +78,7 @@ const BasketTarget = (props) => {
 
     return (
         <>
-            <div className="basket-target" onDrop={handleOnDrop} onDragOver={handleDragOver} style={{ backgroundImage: `url(${basketIcon})` }}>
+            <div className="basket-target" onDrop={handleOnDrop} onDragOver={handleDragOver} onTouchEnd={handleOnDrop} onTouchMove={handleDragOver} style={{ backgroundImage: `url(${basketIcon})` }}>
                 <span> Count: {props.num} </span>
             </div>
         </>
