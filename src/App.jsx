@@ -7,7 +7,7 @@ import AdditionPage from './pages/AdditionPage';
 import SubtractionPage from './pages/SubtractionPage';
 import MultiplicationPage from './pages/MultiplicationPage';
 import DivisionPage from './pages/DivisionPage';
-import DragDropAdd from './pages/DragDropAdd';
+import DndAddition from './pages/dnd-addition.jsx';
 import SimpleAdd from './pages/SimpleAdd';
 import Footer from './components/footer.jsx'
 import Header from './components/header.jsx'
@@ -28,7 +28,7 @@ function App() {
             <Route path="/subtraction" element={<SubtractionPage />} />
             <Route path="/multiplication" element={<MultiplicationPage />} />
             <Route path="/division" element={<DivisionPage />} />
-            <Route path="/dragDropAdd" element={<DragDropAdd />} />
+            <Route path="/dragDropAdd" element={<DndAddition />} />
             <Route path="/simpleAdd" element={<SimpleAdd />} />
           </Routes>
         </main>
