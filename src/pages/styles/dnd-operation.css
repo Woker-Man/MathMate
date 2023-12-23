@@ -1,5 +1,5 @@
 
-.dnd-addition-container {
+.dnd-operation-container {
 
     position: relative;
     /* margin-top: 100px; */
@@ -7,7 +7,7 @@
     justify-content: space-between;
 }
 
-.dnd-addition-container-left {
+.dnd-operation-container-left {
     width: 50%;
     padding-top: 50px;
     padding-left: 50px;
@@ -15,12 +15,12 @@
 }
 
 
-.dnd-addition-container-left-top {
+.dnd-operation-container-left-top {
 
     height: 20%;
 }
 
-.dnd-addition-container-left-bottom {
+.dnd-operation-container-left-bottom {
     height: 80%;
     position: relative;
     display: flex;
@@ -28,7 +28,7 @@
     justify-content: space-around;
 }
 
-.dnd-addition-container-left .icon-addition {
+.dnd-operation-container-left .icon-addition {
     width: 100px;
     height: 100px;
 
@@ -42,16 +42,16 @@
     padding: 10px;
 }
 
-.dnd-addition-container-left-top button{
+.dnd-operation-container-left-top button{
     padding: 10px;
     margin: 10px;
     background-color: lightyellow;
 }
-.dnd-addition-container-left-top .button-container {
+.dnd-operation-container-left-top .button-container {
     margin-left: 300px;
 }
 
-.dnd-addition-container-right {
+.dnd-operation-container-right {
     width: 50%;
     position: relative;
     display: flex;

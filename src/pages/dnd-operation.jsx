@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
-import "./styles/dnd-addition.css"
+import "./styles/dnd-operation.css"
 import { nanoid } from "@reduxjs/toolkit"
 import appleIcon from '../assets/apple.png'
 import basketIcon from '../assets/basket.png'
@@ -81,13 +81,29 @@ const BasketTarget = (props) => {
     )
 }
 
-const DndAddition = () => {
+const DndOperation = (props) => {
 
     const [itemNo1, setItemNo1] = useState(Math.floor(Math.random() * 5) + 1);
     const [itemNo2, setItemNo2] = useState(Math.floor(Math.random() * 5) + 1);
     const [itemsInTargetBasket, setItemsInTargetBasket] = useState(0);
     const [itemsInSourceBasket, setItemsInSourceBasket] = useState(13);
+    const [operationIcon, setOperationIcon] = useState(null)
 
+
+    useEffect(() => {
+
+        switch (props.type) {
+            case "+":
+                setOperationIcon(additionIcon)
+                break
+
+            default:
+                console.err("Invalid Operation",props.type)
+                break;
+        }
+
+
+    }, [])
 
     const resetValues = () => {
         setItemNo1(Math.floor(Math.random() * 5) + 1)
@@ -123,23 +139,23 @@ const DndAddition = () => {
 
     return (
         <>
-            <div className="dnd-addition-container prevent-select" >
-                <div className="dnd-addition-container-left">
+            <div className="dnd-operation-container prevent-select" >
+                <div className="dnd-operation-container-left">
 
-                    <div className="dnd-addition-container-left-top">
+                    <div className="dnd-operation-container-left-top">
                         <div className="button-container">
                             <button onClick={(e) => { checkCorrectAnswer() }}> Submit </button>
                             <button onClick={(e) => { resetValues }}> Reset </button>
                         </div>
                     </div>
-                    <div className="dnd-addition-container-left-bottom">
+                    <div className="dnd-operation-container-left-bottom">
                         <BoxFullOfItems num={itemNo1} itemWidth="100px" />
-                        <img src={additionIcon} className="icon-addition"></img>
+                        <img src={operationIcon} className="icon-operation"></img>
                         <BoxFullOfItems num={itemNo2} itemWidth="100px" />
                     </div>
                 </div>
 
-                <div className="dnd-addition-container-right">
+                <div className="dnd-operation-container-right">
                     <BasketTarget num={itemsInTargetBasket} incrementHook={incrementItemsInTargetBasket} />
                     <BasketSource num={itemsInSourceBasket} itemWidth="80px" />
                 </div>
@@ -151,4 +167,4 @@ const DndAddition = () => {
 
 }
 
-export default DndAddition;
+export default DndOperation;
