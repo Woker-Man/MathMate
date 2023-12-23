@@ -47,7 +47,7 @@ const BasketSource = (props) => {
                 {
                     Array.from({ length: props.num }, (_, i) => i + 1).map(() => {
                         return (
-                            <div key={nanoid()} draggable onDragStart={(e) => { handleOnDrag(e, "apple")  } }  onTouchStart={(e)=>{handleOnDrag(e,"apple")}}>
+                            <div key={nanoid()} draggable onDragStart={(e) => { handleOnDrag(e, "apple")  } }  onTouchStart={(e)=>{handleOnDrag(e,"apple")}} onContextMenu={(e)=>{e.preventDefault()}} onClick={(e)=>{e.preventDefault()}} onTouchEnd={(e)=>{e.preventDefault()}}>
                                 <img src={props.iconSrc} width={props.itemWidth} ></img>
                             </div>
                         )
