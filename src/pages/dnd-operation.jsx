@@ -3,8 +3,13 @@ import { useState } from "react";
 import "./styles/dnd-operation.css"
 import { nanoid } from "@reduxjs/toolkit"
 import appleIcon from '../assets/apple.png'
+import apple2Icon from '../assets/apple2.png'
 import basketIcon from '../assets/basket.png'
 import additionIcon from '../assets/addition.png'
+import bananaIcon from '../assets/banana.png'
+import orangeIcon from '../assets/orange.png'
+import grapeIcon from '../assets/grape.png'
+import pencilIcon from '../assets/pencil.png'
 
 const BoxFullOfItems = (props) => {
 
@@ -15,7 +20,7 @@ const BoxFullOfItems = (props) => {
                     Array.from({ length: props.num }, (_, i) => i + 1).map(() => {
                         return (
                             <div key={nanoid()}>
-                                <img src={appleIcon} draggable={false} width={props.itemWidth} ></img>
+                                <img src={props.iconSrc} draggable={false} width={props.itemWidth} ></img>
                             </div>
                         )
                     })
@@ -43,7 +48,7 @@ const BasketSource = (props) => {
                     Array.from({ length: props.num }, (_, i) => i + 1).map(() => {
                         return (
                             <div key={nanoid()} draggable onDragStart={(e) => { handleOnDrag(e, "apple") }}>
-                                <img src={appleIcon} width={props.itemWidth} ></img>
+                                <img src={props.iconSrc} width={props.itemWidth} ></img>
                             </div>
                         )
                     })
@@ -88,6 +93,13 @@ const DndOperation = (props) => {
     const [itemsInTargetBasket, setItemsInTargetBasket] = useState(0);
     const [itemsInSourceBasket, setItemsInSourceBasket] = useState(13);
     const [operationIcon, setOperationIcon] = useState(null)
+    const [itemIcon, setItemIcon] = useState(null)
+    const iconList = [appleIcon, apple2Icon, bananaIcon, orangeIcon, grapeIcon, pencilIcon]
+
+    const randomFromArray = (arr) => {
+        return arr[Math.floor(Math.random() * arr.length)]
+    }
+
 
 
     useEffect(() => {
@@ -98,9 +110,11 @@ const DndOperation = (props) => {
                 break
 
             default:
-                console.err("Invalid Operation",props.type)
+                console.err("Invalid Operation", props.type)
                 break;
         }
+
+        setItemIcon(randomFromArray(iconList))
 
 
     }, [])
@@ -110,6 +124,7 @@ const DndOperation = (props) => {
         setItemNo2(Math.floor(Math.random() * 5) + 1)
         setItemsInSourceBasket(13)
         setItemsInTargetBasket(0)
+        setItemIcon(randomFromArray(iconList))
     }
 
     const incrementItemsInTargetBasket = () => {
@@ -145,19 +160,19 @@ const DndOperation = (props) => {
                     <div className="dnd-operation-container-left-top">
                         <div className="button-container">
                             <button onClick={(e) => { checkCorrectAnswer() }}> Submit </button>
-                            <button onClick={(e) => { resetValues }}> Reset </button>
+                            <button onClick={(e) => { resetValues() }}> Reset </button>
                         </div>
                     </div>
                     <div className="dnd-operation-container-left-bottom">
-                        <BoxFullOfItems num={itemNo1} itemWidth="100px" />
-                        <img src={operationIcon} className="icon-operation"></img>
-                        <BoxFullOfItems num={itemNo2} itemWidth="100px" />
+                        <BoxFullOfItems num={itemNo1} itemWidth="100px" iconSrc={itemIcon} />
+                        <img src={operationIcon} className="icon-operation" ></img>
+                        <BoxFullOfItems num={itemNo2} itemWidth="100px" iconSrc={itemIcon} />
                     </div>
                 </div>
 
                 <div className="dnd-operation-container-right">
                     <BasketTarget num={itemsInTargetBasket} incrementHook={incrementItemsInTargetBasket} />
-                    <BasketSource num={itemsInSourceBasket} itemWidth="80px" />
+                    <BasketSource num={itemsInSourceBasket} itemWidth="80px" iconSrc={itemIcon} />
                 </div>
             </div>
 
