@@ -52,3 +52,86 @@ header p{
   justify-content: center;
   
   }
+
+#simple_addition  {
+  font: normal 16px/1.5 "Andale Mono", AndaleMono, monospace;
+  color: black;
+  padding: 160px;
+  width: auto;
+  margin: 0 ;
+  background-color:#ECF9FF;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+#simple_addition h1 {
+  font-size: 3em;
+  margin-bottom: 20px;
+}
+
+#simple_addition .container {
+  margin: 5% auto;
+}
+
+#simple_addition span{
+  display: inline-block;
+  background-color: #6bbe92;
+  border: 0;
+  width: 80px;
+  height: 80px;
+  margin: 10px;
+  text-align: center;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.2em;
+  border-radius: 60%;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#simple_addition button{
+  display: inline-block;
+background-color: #6bbe92;
+border: 2px solid #4c8f6e; /* Add a border for a button-like appearance */
+border-radius: 8px; /* Add curved edges */
+padding: 10px 20px; /* Adjust padding for better proportions */
+margin: 10px;
+text-align: center;
+color: #fff;
+font-weight: bold;
+font-size: 1.8em; /* Increase font size */
+cursor: pointer;
+transition: background-color 0.3s ease;
+}
+
+
+#simple_addition button:hover {
+  background-color: #4c9b77;
+}
+
+#simple_addition input {
+  font-size: 1em;
+padding: 12px; /* Increase padding for a bigger input box */
+margin-top: 10px;
+border: 2px solid #6bbe92;
+border-radius: 5px;
+
+width: 150px; /* Increase width for a wider input box */
+text-align: center;
+}
+
+.message {
+  margin-top: 20px;
+  font-size: 1.2em;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.correct {
+  background-color: #4caf50;
+}
+
+.incorrect {
+  background-color: #f44336;
+}
