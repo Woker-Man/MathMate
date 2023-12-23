@@ -20,7 +20,7 @@ const BoxFullOfItems = (props) => {
                     Array.from({ length: props.num }, (_, i) => i + 1).map(() => {
                         return (
                             <div key={nanoid()}>
-                                <img src={props.iconSrc} draggable={false} width={props.itemWidth} ></img>
+                                <img src={props.iconSrc} draggable={false} width={props.itemWidth} onContextMenu={(e)=> {e.preventDefault()}}></img>
                             </div>
                         )
                     })
