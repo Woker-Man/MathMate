@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './styles/MultiRain.css'; // Adjust the file name as needed
 
 function MultiRain() {
@@ -7,39 +7,56 @@ function MultiRain() {
   const [userAnswer, setUserAnswer] = useState('');
 
   useEffect(() => {
-    generateNewEquation();
-  }, [score]); // Re-generate equation when the score changes
+    const intervalId = setInterval(() => {
+      generateNewEquation();
+    }, 5000); // Set the interval to 5 seconds
 
-  const generateNewEquation = () => {
-    const newEquation = generateEquation();
-    setEquations([newEquation]);
-  };
-
-  const generateEquation = () => {
-    const num1 = Math.floor(Math.random() * 10) + 1;
-    const num2 = Math.floor(Math.random() * 10) + 1;
-    const answer = num1 * num2;
-
-    return {
-      equation: `${num1} X ${num2}`,
-      answer,
-      column: Math.floor(Math.random() * 10),
-      row: Math.floor(Math.random() * 10),
+    const handleKeyPress = (event) => {
+      if (event.key === 'Enter') {
+        handleAnswer();
+      }
     };
-  };
 
-  const handleAnswer = () => {
-    const currentEquation = equations[0];
+    // Attach the key press event listener
+    window.addEventListener('keydown', handleKeyPress);
 
-    if (parseInt(userAnswer, 10) === currentEquation.answer) {
-      setScore(score + 1);
-     
-    } else {
-      setScore(Math.max(score - 1, 0));
-    }
+    const generateNewEquation = () => {
+      const newEquation = generateEquation();
+      setEquations([newEquation]);
+    };
 
-    setUserAnswer(''); // Clear the answer after handling it
-  };
+    const generateEquation = () => {
+      const num1 = Math.floor(Math.random() * 10) + 1;
+      const num2 = Math.floor(Math.random() * 10) + 1;
+      const answer = num1 * num2;
+
+      return {
+        equation: `${num1} X ${num2}`,
+        answer,
+        column: Math.floor(Math.random() * 10),
+        row: Math.floor(Math.random() * 10),
+      };
+    };
+
+    const handleAnswer = () => {
+      const currentEquation = equations[0];
+
+      if (parseInt(userAnswer, 10) === currentEquation.answer) {
+        setScore(score + 1);
+      } else {
+        setScore(Math.max(score - 1, 0));
+      }
+
+      setUserAnswer(''); // Clear the answer after handling it
+      generateNewEquation(); // Generate a new equation after handling the answer
+    };
+
+    // Detach the key press event listener when the component unmounts
+    return () => {
+      window.removeEventListener('keydown', handleKeyPress);
+      clearInterval(intervalId);
+    };
+  }, [equations, userAnswer, score]);
 
   return (
     <div className="MultiRain">
@@ -55,14 +72,14 @@ function MultiRain() {
                 {equations
                   .filter((equation) => equation.row === rowIndex && equation.column === colIndex)
                   .map((equation, index) => (
-                    <div key={index} className="equation" style={{ animationDelay: `${index * 2}s` }}>
+                    <div key={index} className="equation">
                       {equation.equation}
                     </div>
                   ))}
               </div>
             ))}
             {/* Display row index at the rightmost column */}
-            <div className="row-index">{10-rowIndex}</div>
+            <div className="row-index">{10 - rowIndex}</div>
           </React.Fragment>
         ))}
       </div>
@@ -72,7 +89,6 @@ function MultiRain() {
         placeholder="Your Answer"
         value={userAnswer}
         onChange={(e) => setUserAnswer(e.target.value)}
-        onBlur={handleAnswer}
       />
     </div>
   );

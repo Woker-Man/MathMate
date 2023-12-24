@@ -47,7 +47,7 @@ input {
 
 @keyframes fall {
   0% {
-    transform: translateY(-600%);
+    transform: translateY(-1170%);
     visibility: visible;
   }
 
