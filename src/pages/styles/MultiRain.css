@@ -28,7 +28,7 @@
 
 .equation {
   position: absolute;
-  animation: fall 5s linear infinite;
+  animation: fall 10s linear infinite;
 }
 
 .score {
@@ -47,7 +47,7 @@ input {
 
 @keyframes fall {
   0% {
-    transform: translateY(-1170%);
+    transform: translateY(-50%);
     visibility: visible;
   }
 
