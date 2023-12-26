@@ -1,7 +1,7 @@
 // src/pages/AdditionPage.js
 import { useNavigate } from 'react-router-dom';
 // import './styles/Multi.css';
-function AdditionPage() {
+function MultiplicationPage() {
   const navigate = useNavigate();
 
   const goToDragDropAdd = () => {
@@ -34,4 +34,4 @@ function AdditionPage() {
   );
 }
 
-export default AdditionPage;
+export default MultiplicationPage;

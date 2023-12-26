@@ -1,0 +1,59 @@
+.MultiRain {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .game-container {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr) 1fr; /* Add an extra column for numbering */
+    grid-template-rows: repeat(10, 1fr);
+    margin-top: 20px;
+    font-size: 24px;
+    height: 500px; /* Adjust the height as needed to accommodate the entire grid */
+    overflow: hidden;
+    border: 2px solid #000;
+    position: relative;
+  }
+  
+  .cell {
+    border-bottom: 1px solid #000; /* Add border for row lines only */
+    position: relative;
+  }
+  
+  .row-number {
+    position: absolute;
+    right: 0;
+    transform: translateY(-50%); /* Center the row numbers vertically */
+  }
+  
+  .equation {
+    position: absolute;
+    animation: fall 10s linear infinite;
+  }
+  
+  .score {
+    margin-top: 10px;
+    font-size: 20px;
+  }
+  
+  input {
+    margin-top: 10px;
+    padding: 5px;
+    font-size: 16px;
+  }
+  .last-column {
+    border-right: 2px solid #000; /* Add a border to the right for the last column */
+  }
+  
+  @keyframes fall {
+    0% {
+      transform: translateY(-50%);
+      visibility: visible;
+    }
+  
+    100% {
+      transform: translateY(1350%); /* Adjust the percentage to ensure the numbers reach the bottom */
+      visibility: hidden;
+    }
+  }
+  
