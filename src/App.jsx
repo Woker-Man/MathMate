@@ -10,9 +10,10 @@ import DragDropAdd from './pages/DragDropAdd';
 import SimpleAdd from './pages/SimpleAdd';
 import DragDropSub from './pages/DragDropSub';
 import SimpleSub from './pages/SimpleSub';
- import MultiRain from './pages/MultiRain';
- import DivRain from './pages/DivRain';
-//  import SimpleMulti from './pages/SimpleMulti';
+import MultiRain from './pages/MultiRain';
+import DivRain from './pages/DivRain';
+import SimpleMulti from './pages/SimpleMulti';
+import SimpleDiv from './pages/SimpleDiv';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import './App.css';
@@ -76,7 +77,8 @@ function App() {
             <Route path="/simpleSub" element={<SimpleSub/>} />
             <Route path="/MultiRain" element={<MultiRain/>} />
             <Route path="/DivRain" element={<DivRain/>} />
-            {/* <Route path="/simpleMulti" element={<SimpleMulti/>} /> */}
+            <Route path="/simpleMulti" element={<SimpleMulti/>} />
+            <Route path="/simpleDiv" element={<SimpleDiv/>} />
           </Routes>
         </main>
         <footer className="App-footer">

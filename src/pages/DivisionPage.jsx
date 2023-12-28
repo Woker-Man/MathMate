@@ -17,16 +17,16 @@ function DivisionPage() {
   return (
     <div>
       <header>
-      <h2>Addition Page</h2>
+      <h2>Division Page</h2>
       </header>
     <div className="Addition">
       
       <div className="container">
       <button className="btn btn-primary mx-4" onClick={goToDragDropAdd}>
-        Divlication Rain 
+        Division Rain 
       </button>
       <button className="btn btn-secondary mx-4" onClick={goToSimpleAdd}>
-        DivMulti
+        Simple Div
       </button>
       </div>
     </div>

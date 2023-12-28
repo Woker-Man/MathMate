@@ -17,7 +17,7 @@ function MultiplicationPage() {
   return (
     <div>
       <header>
-      <h2>Addition Page</h2>
+      <h2>Multiplication Page</h2>
       </header>
     <div className="Addition">
       

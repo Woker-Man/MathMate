@@ -1,7 +1,7 @@
 import  { useState, useEffect } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 
-const SimpleMulti = () => {
+const SimpleDiv = () => {
   const [rangeStart, setRangeStart] = useState(1);
   const [rangeEnd, setRangeEnd] = useState(0);
   const [num1, setNum1] = useState(1);
@@ -17,7 +17,7 @@ const SimpleMulti = () => {
 
   const generateRandomNumbers = () => {
     const newRangeStart = rangeEnd + 1;
-    const newRangeEnd = newRangeStart + 2;
+    const newRangeEnd = newRangeStart + 4;
     setRangeStart(newRangeStart);
     setRangeEnd(newRangeEnd);
 
@@ -34,7 +34,7 @@ const SimpleMulti = () => {
     const userEnteredAnswer = parseInt(userAnswer, 10);
 
     setIsCorrect((prevIsCorrect) => {
-      const newIsCorrect = userEnteredAnswer === correctAnswer;
+      const newIsCorrect = userEnteredAnswer === num1;
 
       if (newIsCorrect) {
         generateRandomNumbers();
@@ -47,7 +47,7 @@ const SimpleMulti = () => {
         }
         setNormalScore(0);
         setShowModal(true);
-
+        setUserAnswer('');
         setTimeout(() => {
           setShowModal(false);
         }, 2000);
@@ -71,13 +71,13 @@ const SimpleMulti = () => {
   return (
     <div id="simple_addition">
       <h2>Normal Score: {normalScore}</h2> <h2>High Score: {highScore}</h2>
-      <h1>Simple Add</h1>
+      <h1>Simple Division</h1>
       <center>
         <h2>Add the following numbers:</h2>
       </center>
       <div className="container">
         <h1>
-          {num1} <span>X</span> {num2} ={' '}
+          {num1*num2} <span>÷</span> {num2} ={' '}
           <input
             type="text"
             value={userAnswer}
@@ -107,4 +107,4 @@ const SimpleMulti = () => {
   );
 };
 
-export default SimpleMulti;
+export default SimpleDiv;

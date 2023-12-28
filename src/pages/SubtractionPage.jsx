@@ -17,7 +17,7 @@ function SubtractionPage() {
   return (
     <div>
       <header>
-      <h2>Addition Page</h2>
+      <h2>Subtraction Page</h2>
       </header>
     <div className="Addition">
       
