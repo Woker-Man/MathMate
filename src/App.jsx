@@ -82,19 +82,22 @@ function App() {
           </Routes>
         </main>
         <footer className="App-footer">
-          {!showMathButtons && (
-            <>
-              <Link
-                to="/"
-                className="btn btn-primary mx-4"
-                onClick={() => setShowMathButtons(true)}
-              >
-                Back
-              </Link>
-            </>
-          )}
-          <p>&copy; 2023 MathMate. All rights reserved.</p>
-        </footer>
+  <div className="footer-content">
+    {!showMathButtons && (
+      <>
+        <Link
+          to="/"
+          className="btn btn-primary mx-4"
+          onClick={() => setShowMathButtons(true)}
+        >
+          Back
+        </Link>
+      </>
+    )}
+    <p>&copy; 2023 MathMate. All rights reserved.</p>
+  </div>
+</footer>
+
       </Router>
     </DndProvider>
   );

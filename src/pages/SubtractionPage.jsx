@@ -16,16 +16,16 @@ function SubtractionPage() {
 
   return (
     <div>
-      <header>
-      <h2>Subtraction Page</h2>
+      <header className='header'>
+      <h1 className='head'>Subtraction Page</h1>
       </header>
     <div className="Addition">
       
       <div className="container">
-      <button className="btn btn-primary mx-4" onClick={goToDragDropAdd}>
+      <button className="button btn btn-primary mx-4" onClick={goToDragDropAdd}>
         DragDropSub
       </button>
-      <button className="btn btn-secondary mx-4" onClick={goToSimpleAdd}>
+      <button className="button btn btn-secondary mx-4" onClick={goToSimpleAdd}>
         SimpleSub
       </button>
       </div>

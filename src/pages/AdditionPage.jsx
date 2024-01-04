@@ -16,16 +16,16 @@ function AdditionPage() {
 
   return (
     <div>
-      <header>
-      <h2>Addition Page</h2>
+      <header className='header'>
+      <h1 className='head'>Addition Page</h1>
       </header>
     <div className="Addition">
       
       <div className="container">
-      <button className="btn btn-primary mx-4" onClick={goToDragDropAdd}>
+      <button className="button btn btn-primary mx-4" onClick={goToDragDropAdd}>
         DragDropAdd
       </button>
-      <button className="btn btn-secondary mx-4" onClick={goToSimpleAdd}>
+      <button className="button btn btn-secondary mx-4" onClick={goToSimpleAdd}>
         SimpleAdd 
       </button>
       </div>

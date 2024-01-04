@@ -14,9 +14,23 @@ const DragDropAdd = () => {
   function shuffleSymbols() {
     symbols.sort(() => Math.random() - 0.5);
   }
+  const containerStyle = {
+    backgroundImage: 'url("https://webstockreview.net/images/morning-clipart-sunny-landscape-4.jpg")',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    height: '100vh', // Set the height as needed
+    // Add other styles as needed
+  };
+  const addSym = {
+    backgroundImage: 'url("https://i.pinimg.com/originals/7d/de/b5/7ddeb519a4500e81366982f14b5beee6.png")',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    // height: '100vh', // Set the height as needed
+    // Add other styles as needed
+  };
 
   function createSymbol(symbol, count, container, movable) {
-    const symbolsPerRow = 3; // Number of symbols per row
+    const symbolsPerRow = 4; // Number of symbols per row
     const symbolSize = 50;
     const padding = 30; // Increased padding for more space between symbols
   
@@ -25,7 +39,7 @@ const DragDropAdd = () => {
       symbolElement.className = "symbol";
       symbolElement.src = `/images/${symbol}.png`; // Assuming all symbols are in the public directory
       symbolElement.draggable = movable;
-  
+      
       symbolElement.addEventListener("dragstart", createDragStartHandler(symbolElement));
   
       const row = Math.floor(i / symbolsPerRow);
@@ -36,7 +50,8 @@ const DragDropAdd = () => {
   
       symbolElement.style.top = posY + "px";
       symbolElement.style.left = posX + "px";
-  
+       symbolElement.style.marginLeft=70+"px"
+      //  symbolElement.style.marginRight=70+"px"
       container.appendChild(symbolElement);
     }
   }
@@ -97,7 +112,7 @@ const DragDropAdd = () => {
     shuffleSymbols();
 
     maxTargetCount = Math.floor(Math.random() * 14) + 2;
-    document.getElementById("maxTarget").textContent = "Max Target: " + maxTargetCount;
+    // document.getElementById("maxTarget").textContent = "Max Target: " + maxTargetCount;
 
     var targetCount1 = Math.floor(Math.random() * (maxTargetCount - 1)) + 1;
     var targetCount2 = maxTargetCount - targetCount1;
@@ -111,7 +126,7 @@ const DragDropAdd = () => {
 
     createSymbol(targetFruit, targetCount1, document.getElementById("box1"), false);
     createSymbol(targetFruit, targetCount2, document.getElementById("box2"), false);
-    createSymbol(targetFruit, 15, document.getElementById("box3"), true);
+    createSymbol(targetFruit, 16, document.getElementById("box3"), true);
 
     if (currentSymbolIndex === symbols.length) {
       currentSymbolIndex = 0;
@@ -191,16 +206,17 @@ const DragDropAdd = () => {
   }, []);
 
   return (
-    <div>
+    <div style={containerStyle}>
       <div className="container" id="basket">
       
         Basket: 0
       </div>
-      <img src="/images/basket.png" alt="Basket" className="basket-image" />
-
-      <div className="container" id="maxTarget">
+      <img src="https://clipart-library.com/img/1078553.png" alt="Basket" className="basket-image" />
+      <img src="https://i.pinimg.com/originals/a8/fc/be/a8fcbef17839235c1f092466fdbb361a.png" alt="frame" className="frame"/>
+      {/* <img src="https://www.onlygfx.com/wp-content/uploads/2018/01/rectangle-flower-frame-vector-2-7.png" alt="frame2" className="frame2" /> */}
+      {/* <div className="container" id="maxTarget">
         Max Target: 0
-      </div>
+      </div> */}
       <div className="container" id="score">
         Score: 0
       </div>
@@ -208,18 +224,18 @@ const DragDropAdd = () => {
         High Score: 0
       </div>
       <div className="container" id="box1"></div>
-      <div className="container" id="plus">
-        +
+      <div className="container" id="plus" style={addSym}>
+        
       </div>
       <div className="container" id="box2"></div>
-      <div className="container" id="box3"></div>
+      <div className="container" id="box3" ></div>
       <div className="container" id="symbol">
         {/* index: 0 */}
       </div>
       <div className="container" id="fruit">
         {/* fruit: apple */}
       </div>
-      <button onClick={submitAnswer}>Submit</button>
+      <button onClick={submitAnswer} className='submit-button'>Submit</button>
     </div>
   );
 };

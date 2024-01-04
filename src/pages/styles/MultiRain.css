@@ -1,6 +1,7 @@
 .MultiRain {
   text-align: center;
   padding: 20px;
+  /* width: 1000px; */
 }
 
 .game-container {
@@ -9,14 +10,15 @@
   grid-template-rows: repeat(10, 1fr);
   margin-top: 20px;
   font-size: 24px;
-  height: 500px; /* Adjust the height as needed to accommodate the entire grid */
+  height: 470px; /* Adjust the height as needed to accommodate the entire grid */
   overflow: hidden;
   border: 2px solid #000;
   position: relative;
+  /* width: 1200px; */
 }
 
 .cell {
-  border-bottom: 1px solid #000; /* Add border for row lines only */
+  /* border-bottom: 1px solid #000; Add border for row lines only */
   position: relative;
 }
 
@@ -32,8 +34,11 @@
 }
 
 .score {
+  position: relative;
+  /* left: 700px; */
   margin-top: 10px;
   font-size: 20px;
+  /* top: -200px; */
 }
 
 input {
@@ -42,7 +47,12 @@ input {
   font-size: 16px;
 }
 .last-column {
-  border-right: 2px solid #000; /* Add a border to the right for the last column */
+  /* border-right: 2px solid #000; Add a border to the right for the last column */
+  border-right: 10px solid #3498db; /* Set border color */
+  /* border-radius: 15px; Add rounded corners */
+  /* padding: 10px; Add some padding inside the border */
+  /* box-shadow: 0 0 10px rgba(52, 152, 219, 0.5); Add a subtle box shadow */
+  /* background-color: #ecf0f1; Set background color */
 }
 
 @keyframes fall {
@@ -55,4 +65,62 @@ input {
     transform: translateY(1350%); /* Adjust the percentage to ensure the numbers reach the bottom */
     visibility: hidden;
   }
+}
+input[type="number"] {
+  position: relative;
+  top: -14px;
+  font-size: 1.2em;
+  padding: 8px;
+  border: 2px solid #3498db;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.3s ease-in-out;
+  text-align: center;
+}
+
+/* Styling for focus state of the input */
+input[type="number"]:focus {
+  border-color: #e74c3c;
+}
+
+/* Add some additional styling to make it visually appealing */
+.input-container {
+  position: relative;
+  top: -2px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+/* Add some color and fun to the score display */
+.score {
+  font-size: 1.5em;
+  color:black;
+  font-weight: bolder;
+  margin-bottom: 10px;
+  /* background-color: yellow; */
+  /* width: 50px; */
+}
+h1 {
+  color: #3498db; /* Set header color */
+  text-align: center; /* Center the header text */
+}
+.game-container {
+  border: 10px solid #3498db; /* Set border color */
+  border-radius: 15px; /* Add rounded corners */
+  padding: 10px; /* Add some padding inside the border */
+  box-shadow: 0 0 10px rgba(52, 152, 219, 0.5); /* Add a subtle box shadow */
+  /* background-color: #ecf0f1; */
+  /* opacity: 0.7; */
+}
+.equation {
+  font-size: 1.2em; /* Set the font size */
+  font-weight: bold; /* Add boldness to the font */
+  color: #00060b; /* Set a dark font color for better visibility on light background */
+  text-shadow: 1px 1px 2px rgba(44, 62, 80, 0.5); /* Add a subtle text shadow for emphasis */
+}
+.row-index{
+  font-size: 1 em; /* Set the font size */
+  font-weight: bold; /* Add boldness to the font */
+  color: #00060b; /* Set a dark font color for better visibility on light background */
+  text-shadow: 1px 1px 2px rgba(44, 62, 80, 0.5); /* Add a subtle text shadow for emphasis */
 }
