@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import './styles/Simple.css';
 
-const SimpleAdd = () => {
+const SimpleDiv= () => {
   const [rangeStart, setRangeStart] = useState(1);
   const [rangeEnd, setRangeEnd] = useState(0);
   const [num1, setNum1] = useState(1);
@@ -18,7 +18,13 @@ const SimpleAdd = () => {
   const [options, setOptions] = useState([]);
   const [animateWrong, setAnimateWrong] = useState(false);
   const [animateCorrect, setAnimateCorrect] = useState(false);
-
+  const containerStyle = {
+    backgroundImage: 'url("https://wallpaperset.com/w/full/2/3/4/323175.jpg")',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    height: '100vh', // Set the height as needed
+    // Add other styles as needed
+  };
   useEffect(() => {
     const savedHighScore = parseInt(sessionStorage.getItem('highScore'), 10) || 0;
     setHighScore(savedHighScore);
@@ -63,10 +69,10 @@ const SimpleAdd = () => {
     const newNum1 = Math.floor(Math.random() * 5) + newRangeStart;
     const newNum2 = Math.floor(Math.random() * 5) + newRangeStart;
     const correctAnswer = newNum1 + newNum2;
-    const a=correctAnswer-1;
-    const b=correctAnswer-2;
-    const c=correctAnswer+1;
-    const allOptions = [a,b,c,correctAnswer].sort(() => Math.random() - 0.5);
+    const a=newNum1-1;
+    const b=newNum1-2;
+    const c=newNum1+1;
+    const allOptions = [a,b,c,newNum1].sort(() => Math.random() - 0.5);
 
     setNum1(newNum1);
     setNum2(newNum2);
@@ -79,7 +85,7 @@ const SimpleAdd = () => {
     const correctAnswer = num1 + num2;
     const userEnteredAnswer = parseInt(selectedOption, 10);
 
-    const newIsCorrect = userEnteredAnswer === correctAnswer;
+    const newIsCorrect = userEnteredAnswer === num1;
 
     setIsCorrect(newIsCorrect);
 
@@ -111,16 +117,16 @@ const SimpleAdd = () => {
   }, []);
 
   return (
-    <div id="simple_addition" className="container-style cool-style">
+    <div id="simple_addition" className="container-style cool-style" style={containerStyle}>
       <h2 className='score1'>Normal Score: {normalScore}</h2> <h2 className='score1'>High Score: {highScore}</h2>
-      <h1 className="font-style">Simple Add</h1>
+      <h1 className="font-style">Simple Division</h1>
       <center>
-        <h2 className='type'>Add the following numbers:</h2>
+        <h2 className='type'>Divide the following numbers:</h2>
       </center>
       <div className={`container ${animateWrong ? 'wrong-answer-animation' : ''} ${animateCorrect ? 'correct-answer-animation' : ''}`}>
         <h1 className="font-style">
-          {num1} <span>+</span> {num2} ={' '}
-{options.map((option, index) => (
+          {num1*num2} <span>÷</span> {num2} ={' '}
+          {options.map((option, index) => (
   <button 
     key={index}
     onClick={() => {
@@ -135,12 +141,10 @@ const SimpleAdd = () => {
     {option}
   </button>
 ))}
-
-
         </h1>
       </div>
     </div>
   );
 };
 
-export default SimpleAdd;
+export default SimpleDiv;

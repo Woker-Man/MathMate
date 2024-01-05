@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './styles/DivRain.css';
+import './styles/MultiRain.css';
 
 function DivRain() {
   const [score, setScore] = useState(0);
@@ -7,6 +7,22 @@ function DivRain() {
   const [userAnswer, setUserAnswer] = useState('');
   const [timer, setTimer] = useState(null);
 
+  const containerStyle = {
+    backgroundImage: 'url("https://cdn.wallpapersafari.com/59/52/0kjwKe.jpg")',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    height: '100vh', // Set the height as needed
+    // Add other styles as needed
+  };
+  const container = {
+    // backgroundImage: 'url("https://cdn.wallpapersafari.com/59/52/0kjwKe.jpg")',
+    // backgroundSize: 'cover',
+    // backgroundPosition: 'center',
+    // height: '100vh', // Set the height as needed
+    // Add other styles as needed
+    // border: 'solid black'
+    color:'black'
+  };
   useEffect(() => {
     const intervalId = setInterval(() => {
       generateNewEquation();
@@ -75,9 +91,9 @@ function DivRain() {
   }, [equations, userAnswer, score, timer]);
 
   return (
-    <div className="MultiRain">
-      <h1>MultiRain - Division Game</h1>
-      <div className="game-container">
+    <div className="MultiRain" style={containerStyle}>
+      <h1 style={container}>Division Rain</h1>
+      <div className="game-container" >
         {[...Array(10)].map((_, rowIndex) => (
           <React.Fragment key={rowIndex}>
             {[...Array(10)].map((_, colIndex) => (

@@ -7,12 +7,20 @@ function MultiRain() {
   const [userAnswer, setUserAnswer] = useState('');
   const [timer, setTimer] = useState(null);
   
+  const containerStyle = {
+    backgroundImage: 'url("https://wallpapercave.com/wp/YEJCt7x.jpg")',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    height: '100vh', // Set the height as needed
+    // Add other styles as needed
+  };
   useEffect(() => {
     
     const intervalId = setInterval(() => {
       generateNewEquation();
       resetTimer();
     }, 10000);
+
 
     const handleKeyPress = (event) => {
       if (event.key === 'Enter') {
@@ -75,8 +83,8 @@ function MultiRain() {
   }, [equations, userAnswer, score, timer]);
 
   return (
-    <div className="MultiRain">
-      <h1>MultiRain</h1>
+    <div className="MultiRain" style={containerStyle}>
+      <h1>Multiplication Rain</h1>
       <div className="game-container">
         {[...Array(10)].map((_, rowIndex) => (
           <React.Fragment key={rowIndex}>
@@ -96,6 +104,7 @@ function MultiRain() {
             ))}
             <div className="row-index">{10 - rowIndex}</div>
           </React.Fragment>
+          
         ))}
       </div>
       <div className="score">Score: {score}</div>
