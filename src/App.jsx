@@ -10,8 +10,7 @@ import DragDropAdd from './pages/DragDropAdd';
 import SimpleAdd from './pages/SimpleAdd';
 import DragDropSub from './pages/DragDropSub';
 import SimpleSub from './pages/SimpleSub';
-import MultiRain from './pages/MultiRain';
-import DivRain from './pages/DivRain';
+import RainOperation from './pages/RainOperation.jsx';
 import SimpleMulti from './pages/SimpleMulti';
 import SimpleDiv from './pages/SimpleDiv';
 import { DndProvider } from 'react-dnd';
@@ -75,8 +74,8 @@ function App() {
             <Route path="/simpleAdd" element={<SimpleAdd />} />
             <Route path="/dragDropSub" element={<DragDropSub />} />
             <Route path="/simpleSub" element={<SimpleSub/>} />
-            <Route path="/MultiRain" element={<MultiRain/>} />
-            <Route path="/DivRain" element={<DivRain/>} />
+            <Route path="/MultiRain" element={<RainOperation operator="*" />} />
+            <Route path="/DivRain" element={<RainOperation operator="/" />} />
             <Route path="/simpleMulti" element={<SimpleMulti/>} />
             <Route path="/simpleDiv" element={<SimpleDiv/>} />
           </Routes>
