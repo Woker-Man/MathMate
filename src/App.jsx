@@ -10,63 +10,24 @@ import DragDropAdd from './pages/DragDropAdd';
 import SimpleAdd from './pages/SimpleAdd';
 import DragDropSub from './pages/DragDropSub';
 import SimpleSub from './pages/SimpleSub';
-import MultiRain from './pages/MultiRain';
-import DivRain from './pages/DivRain';
+import RainOperation from './pages/RainOperation.jsx';
 import SimpleMulti from './pages/SimpleMulti';
 import SimpleDiv from './pages/SimpleDiv';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import './App.css';
+import HomePage from './pages/HomePage.jsx';
+import Footer from './components/footer.jsx';
+import Header from './components/header.jsx'
 
-function App() {
-  const [showMathButtons, setShowMathButtons] = useState(true);
-
+const App = ()=>{
   return (
     <DndProvider backend={HTML5Backend}>
       <Router>
-        {showMathButtons && (
-          <header className="App-header">
-            <h1>Welcome to MathMate</h1>
-            {/* <p>Your user-friendly and inclusive platform for learning mathematics.</p> */}
-          </header>
-        )}
+        <Header />
         <main>
-          <div className="container">
-            {/* Conditionally render math buttons based on state */}
-            {showMathButtons && (
-              <>
-                <Link
-                  to="/addition"
-                  className="btn btn-primary mx-4"
-                  onClick={() => setShowMathButtons(false)}
-                >
-                  Addition
-                </Link>
-                <Link
-                  to="/subtraction"
-                  className="btn btn-secondary mx-4"
-                  onClick={() => setShowMathButtons(false)}
-                >
-                  Subtraction
-                </Link>
-                <Link
-                  to="/multiplication"
-                  className="btn btn-success mx-4"
-                  onClick={() => setShowMathButtons(false)}
-                >
-                  Multiplication
-                </Link>
-                <Link
-                  to="/division"
-                  className="btn btn-danger mx-4"
-                  onClick={() => setShowMathButtons(false)}
-                >
-                  Division
-                </Link>
-              </>
-            )}
-          </div>
           <Routes>
+            <Route path="/" element={<HomePage />} />
             <Route path="/addition" element={<AdditionPage />} />
             <Route path="/subtraction" element={<SubtractionPage />} />
             <Route path="/multiplication" element={<MultiplicationPage />} />
@@ -75,28 +36,13 @@ function App() {
             <Route path="/simpleAdd" element={<SimpleAdd />} />
             <Route path="/dragDropSub" element={<DragDropSub />} />
             <Route path="/simpleSub" element={<SimpleSub/>} />
-            <Route path="/MultiRain" element={<MultiRain/>} />
-            <Route path="/DivRain" element={<DivRain/>} />
+            <Route path="/MultiRain" element={<RainOperation operator="*" />} />
+            <Route path="/DivRain" element={<RainOperation operator="/" />} />
             <Route path="/simpleMulti" element={<SimpleMulti/>} />
             <Route path="/simpleDiv" element={<SimpleDiv/>} />
           </Routes>
         </main>
-        <footer className="App-footer">
-  <div className="footer-content">
-    {!showMathButtons && (
-      <>
-        <Link
-          to="/"
-          className="btn btn-primary mx-4"
-          onClick={() => setShowMathButtons(true)}
-        >
-          Back
-        </Link>
-      </>
-    )}
-    <p>&copy; 2023 MathMate. All rights reserved.</p>
-  </div>
-</footer>
+        <Footer />
 
       </Router>
     </DndProvider>

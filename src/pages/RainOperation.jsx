@@ -1,32 +1,52 @@
 import React, { useState, useEffect } from 'react';
 import './styles/MultiRain.css';
 
-function MultiRain() {
+const RainOperation = ({operator})=>{
   const [score, setScore] = useState(0);
   const [equations, setEquations] = useState([]);
   const [userAnswer, setUserAnswer] = useState('');
   const [timer, setTimer] = useState(null);
-  
+  const [operationName,setOperationName] = useState("Operation") 
+
   const containerStyle = {
-    backgroundImage: 'url("https://wallpapercave.com/wp/YEJCt7x.jpg")',
+    backgroundImage: 'url("https://cdn.wallpapersafari.com/59/52/0kjwKe.jpg")',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     height: '100vh', // Set the height as needed
     // Add other styles as needed
   };
+  const container = {
+    // backgroundImage: 'url("https://cdn.wallpapersafari.com/59/52/0kjwKe.jpg")',
+    // backgroundSize: 'cover',
+    // backgroundPosition: 'center',
+    // height: '100vh', // Set the height as needed
+    // Add other styles as needed
+    // border: 'solid black'
+    color:'black'
+  };
   useEffect(() => {
-    
     const intervalId = setInterval(() => {
       generateNewEquation();
       resetTimer();
     }, 10000);
-
 
     const handleKeyPress = (event) => {
       if (event.key === 'Enter') {
         handleAnswer();
       }
     };
+
+    let equationSymbol = "."
+    switch (operator) {
+        case "*":
+            equationSymbol = "X"
+            setOperationName("Multiplication")
+            break
+        case "/":
+            equationSymbol = "÷"
+            setOperationName("Division")
+            break
+    }
 
     window.addEventListener('keydown', handleKeyPress);
 
@@ -37,12 +57,24 @@ function MultiRain() {
     };
 
     const generateEquation = (fixedRow) => {
-      const num1 = Math.floor(Math.random() * 10) + 1;
-      const num2 = Math.floor(Math.random() * 10) + 1;
-      const answer = num1 * num2;
+      let num1,num2,answer
+     switch(operator) {
+         case "*":
+             num1 = Math.floor(Math.random() * 10) + 1;
+             num2 = Math.floor(Math.random() * 10) + 1;
+             answer = num1 * num2;
+             break;
+         case "/":
+             num2 = Math.floor(Math.random() * 10) + 1;
+             answer = Math.floor(Math.random() * 10) + 1;
+             num1 = num2 * answer;
+             break;
+         default:
+
+    }
 
       return {
-        equation: `${num1} X ${num2}`,
+        equation: `${num1} ${equationSymbol} ${num2}`,
         answer,
         column: Math.floor(Math.random() * 10),
         row: fixedRow, // Fixed row to always start from the top
@@ -61,7 +93,8 @@ function MultiRain() {
 
     const handleAnswer = () => {
       const currentEquation = equations[0];
-
+    
+    
       if (parseInt(userAnswer, 10) === currentEquation.answer) {
         const elapsedTime = Date.now() - currentEquation.startTime;
         const maxScore = 10;
@@ -70,7 +103,7 @@ function MultiRain() {
       } else {
         setScore(Math.max(score - 5, 0));
       }
-
+    
       setUserAnswer('');
       generateNewEquation();
     };
@@ -80,12 +113,12 @@ function MultiRain() {
       clearInterval(intervalId);
       resetTimer();
     };
-  }, [equations, userAnswer, score, timer]);
+  }, [equations, userAnswer, score, timer,operator]);
 
   return (
     <div className="MultiRain" style={containerStyle}>
-      <h1>Multiplication Rain</h1>
-      <div className="game-container">
+      <h1 style={container}>{operationName} Rain</h1>
+      <div className="game-container" >
         {[...Array(10)].map((_, rowIndex) => (
           <React.Fragment key={rowIndex}>
             {[...Array(10)].map((_, colIndex) => (
@@ -104,7 +137,6 @@ function MultiRain() {
             ))}
             <div className="row-index">{10 - rowIndex}</div>
           </React.Fragment>
-          
         ))}
       </div>
       <div className="score">Score: {score}</div>
@@ -118,4 +150,4 @@ function MultiRain() {
   );
 }
 
-export default MultiRain;
+export default RainOperation;
