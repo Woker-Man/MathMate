@@ -1,14 +1,10 @@
-// src/App.js
-
-import { useState } from 'react';
-import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import AdditionPage from './pages/AdditionPage';
 import SubtractionPage from './pages/SubtractionPage';
 import MultiplicationPage from './pages/MultiplicationPage';
 import DivisionPage from './pages/DivisionPage';
-import DragDropAdd from './pages/DragDropAdd';
 import SimpleAdd from './pages/SimpleAdd';
-import DragDropSub from './pages/DragDropSub';
+import DragDropOperation from './pages/DragDropOperation.jsx'
 import SimpleSub from './pages/SimpleSub';
 import RainOperation from './pages/RainOperation.jsx';
 import SimpleMulti from './pages/SimpleMulti';
@@ -32,9 +28,9 @@ const App = ()=>{
             <Route path="/subtraction" element={<SubtractionPage />} />
             <Route path="/multiplication" element={<MultiplicationPage />} />
             <Route path="/division" element={<DivisionPage />} />
-            <Route path="/dragDropAdd" element={<DragDropAdd />} />
+            <Route path="/dragDropAdd" element={<DragDropOperation operator='+' />} />
             <Route path="/simpleAdd" element={<SimpleAdd />} />
-            <Route path="/dragDropSub" element={<DragDropSub />} />
+            <Route path="/dragDropSub" element={<DragDropOperation operator='-' />} />
             <Route path="/simpleSub" element={<SimpleSub/>} />
             <Route path="/MultiRain" element={<RainOperation operator="*" />} />
             <Route path="/DivRain" element={<RainOperation operator="/" />} />

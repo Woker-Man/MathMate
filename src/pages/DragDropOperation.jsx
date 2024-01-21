@@ -1,36 +1,50 @@
 import  { useEffect } from 'react';
 import './styles/DragDropAdd.css';
 
-const DragDropSub = () => {
+const DragDropOperation = ({operator}) => {
   var symbols = ["apple", "banana", "orange", "grape", "pencil"];
   var targetFruit = "apple";
   var basketCounter = 0;
   var maxTargetCount = 0;
-  var targetCount2=0;
   var score = 0;
   var highScore = 0;
   var draggedSymbol = null;
   var currentSymbolIndex = 0;
-  
+
   function shuffleSymbols() {
     symbols.sort(() => Math.random() - 0.5);
   }
-
   const containerStyle = {
-    backgroundImage: 'url("https://static.vecteezy.com/system/resources/previews/000/550/499/original/cartoon-forest-hill-landscape-vector-nature-background-illustration.jpg")',
+    backgroundImage: 'url("https://webstockreview.net/images/morning-clipart-sunny-landscape-4.jpg")',
+    /*
+     * different background for subtraction page
+     * backgroundImage: 'url("https://static.vecteezy.com/system/resources/previews/000/550/499/original/cartoon-forest-hill-landscape-vector-nature-background-illustration.jpg")',
+     */
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     height: '100vh', // Set the height as needed
     // Add other styles as needed
   };
-  const addSym = {
-    backgroundImage: 'url("https://icon-library.com/images/minus-icon-png/minus-icon-png-17.jpg")',
-    backgroundSize: '120px',
-    backgroundPosition: 'center',
 
-    // height: '100vh', // Set the height as needed
-    // Add other styles as needed
-  };
+  const operatorSymbolStyle = ()=>{
+    switch(operator) {
+        case "+" :
+            return {   
+                backgroundImage: 'url("https://i.pinimg.com/originals/7d/de/b5/7ddeb519a4500e81366982f14b5beee6.png")',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+            }
+        case "-" : 
+            return {
+                backgroundImage: 'url("https://icon-library.com/images/minus-icon-png/minus-icon-png-17.jpg")',
+                backgroundSize: '120px',
+                backgroundPosition: 'center',
+            }
+
+        default:
+            console.log("Unknown Operator")
+    }
+  }
 
   function createSymbol(symbol, count, container, movable) {
     const symbolsPerRow = 4; // Number of symbols per row
@@ -108,29 +122,59 @@ const DragDropSub = () => {
     return symbol === targetFruit;
   }
 
-  function resetGame() {
+  const resetGame = ()=>{
     basketCounter = 0;
     document.getElementById("basket").textContent = "Basket: 0";
 
     shuffleSymbols();
 
-    targetCount2 = Math.floor(Math.random() * 14) + 2;
+    var targetCount1,targetCount2,box1,box2,box3;
+
+    switch(operator) {
+        case "+" :
+
+            maxTargetCount = Math.floor(Math.random() * 14) + 2;
+            // document.getElementById("maxTarget").textContent = "Max Target: " + maxTargetCount;
+
+            targetCount1 = Math.floor(Math.random() * (maxTargetCount - 1)) + 1;
+            targetCount2 = maxTargetCount - targetCount1;
+
+            box3 = document.getElementById("box3");
+            box3.innerHTML = "";
+            box2 = document.getElementById("box2");
+            box2.innerHTML = "";
+            box1 = document.getElementById("box1");
+            box1.innerHTML = "";
+
+            createSymbol(targetFruit, targetCount1, document.getElementById("box1"), false);
+            createSymbol(targetFruit, targetCount2, document.getElementById("box2"), false);
+            createSymbol(targetFruit, 16, document.getElementById("box3"), true);
+        
+            break;
+        case "-" :
+                targetCount2 = Math.floor(Math.random() * 14) + 2;
     
 
-    var targetCount1 = Math.floor(Math.random() * (targetCount2 - 1)) + 1;
-    maxTargetCount = targetCount2 - targetCount1;
-    // document.getElementById("maxTarget").textContent = "Max Target: " + maxTargetCount;
+                targetCount1 = Math.floor(Math.random() * (targetCount2 - 1)) + 1;
+                maxTargetCount = targetCount2 - targetCount1;
+                // document.getElementById("maxTarget").textContent = "Max Target: " + maxTargetCount;
 
-    var box3 = document.getElementById("box3");
-    box3.innerHTML = "";
-    var box2 = document.getElementById("box2");
-    box2.innerHTML = "";
-    var box1 = document.getElementById("box1");
-    box1.innerHTML = "";
+                box3 = document.getElementById("box3");
+                box3.innerHTML = "";
+                box2 = document.getElementById("box2");
+                box2.innerHTML = "";
+                box1 = document.getElementById("box1");
+                box1.innerHTML = "";
 
-    createSymbol(targetFruit, targetCount2, document.getElementById("box1"), false);
-    createSymbol(targetFruit, targetCount1, document.getElementById("box2"), false);
-    createSymbol(targetFruit, 16, document.getElementById("box3"), true);
+                createSymbol(targetFruit, targetCount2, document.getElementById("box1"), false);
+                createSymbol(targetFruit, targetCount1, document.getElementById("box2"), false);
+                createSymbol(targetFruit, 16, document.getElementById("box3"), true);
+
+            break;
+        default: 
+            console.log("Unknown Division Parameter")
+
+    }
 
     if (currentSymbolIndex === symbols.length) {
       currentSymbolIndex = 0;
@@ -228,7 +272,7 @@ const DragDropSub = () => {
         High Score: 0
       </div>
       <div className="container" id="box1"></div>
-      <div className="container" id="plus" style={addSym}>
+      <div className="container" id="plus" style={operatorSymbolStyle()}>
         
       </div>
       <div className="container" id="box2"></div>
@@ -244,4 +288,4 @@ const DragDropSub = () => {
   );
 };
 
-export default DragDropSub;
+export default DragDropOperation;
