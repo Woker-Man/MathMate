@@ -13,8 +13,8 @@ import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import './App.css';
 import HomePage from './pages/HomePage.jsx';
-import Footer from './components/footer.jsx';
-import Header from './components/header.jsx'
+import Footer from './components/Footer.jsx';
+import Header from './components/Header.jsx'
 
 const App = ()=>{
   return (
