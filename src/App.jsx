@@ -1,24 +1,14 @@
-// src/App.js
-
-import { useState } from 'react';
-import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
-import AdditionPage from './pages/AdditionPage';
-import SubtractionPage from './pages/SubtractionPage';
-import MultiplicationPage from './pages/MultiplicationPage';
-import DivisionPage from './pages/DivisionPage';
-import DragDropAdd from './pages/DragDropAdd';
-import SimpleAdd from './pages/SimpleAdd';
-import DragDropSub from './pages/DragDropSub';
-import SimpleSub from './pages/SimpleSub';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import OperationPage from './pages/OperationPage.jsx'
+import DragDropOperation from './pages/DragDropOperation.jsx'
 import RainOperation from './pages/RainOperation.jsx';
-import SimpleMulti from './pages/SimpleMulti';
-import SimpleDiv from './pages/SimpleDiv';
+import SimpleOperation from './pages/SimpleOperation.jsx';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import './App.css';
 import HomePage from './pages/HomePage.jsx';
-import Footer from './components/footer.jsx';
-import Header from './components/header.jsx'
+import Footer from './components/Footer.jsx';
+import Header from './components/Header.jsx'
 
 const App = ()=>{
   return (
@@ -28,18 +18,18 @@ const App = ()=>{
         <main>
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/addition" element={<AdditionPage />} />
-            <Route path="/subtraction" element={<SubtractionPage />} />
-            <Route path="/multiplication" element={<MultiplicationPage />} />
-            <Route path="/division" element={<DivisionPage />} />
-            <Route path="/dragDropAdd" element={<DragDropAdd />} />
-            <Route path="/simpleAdd" element={<SimpleAdd />} />
-            <Route path="/dragDropSub" element={<DragDropSub />} />
-            <Route path="/simpleSub" element={<SimpleSub/>} />
+            <Route path="/addition" element={<OperationPage operator="+" />} />
+            <Route path="/subtraction" element={<OperationPage operator="-" />} />
+            <Route path="/multiplication" element={<OperationPage operator="*" />} />
+            <Route path="/division" element={<OperationPage operator="/" />} />
+            <Route path="/dragDropAdd" element={<DragDropOperation operator='+' />} />
+            <Route path="/simpleAdd" element={<SimpleOperation operator="+" />} />
+            <Route path="/dragDropSub" element={<DragDropOperation operator='-' />} />
+            <Route path="/simpleSub" element={<SimpleOperation operator="-"/>} />
             <Route path="/MultiRain" element={<RainOperation operator="*" />} />
             <Route path="/DivRain" element={<RainOperation operator="/" />} />
-            <Route path="/simpleMulti" element={<SimpleMulti/>} />
-            <Route path="/simpleDiv" element={<SimpleDiv/>} />
+            <Route path="/simpleMulti" element={<SimpleOperation operator="*" />} />
+            <Route path="/simpleDiv" element={<SimpleOperation operator="/" />} />
           </Routes>
         </main>
         <Footer />
