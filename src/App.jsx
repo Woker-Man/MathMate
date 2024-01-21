@@ -1,10 +1,8 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import OperationPage from './pages/OperationPage.jsx'
 import DragDropOperation from './pages/DragDropOperation.jsx'
-import SimpleSub from './pages/SimpleSub';
 import RainOperation from './pages/RainOperation.jsx';
-import SimpleMulti from './pages/SimpleMulti';
-import SimpleDiv from './pages/SimpleDiv';
+import SimpleOperation from './pages/SimpleOperation.jsx';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import './App.css';
@@ -25,13 +23,13 @@ const App = ()=>{
             <Route path="/multiplication" element={<OperationPage operator="*" />} />
             <Route path="/division" element={<OperationPage operator="/" />} />
             <Route path="/dragDropAdd" element={<DragDropOperation operator='+' />} />
-            <Route path="/simpleAdd" element={<SimpleAdd />} />
+            <Route path="/simpleAdd" element={<SimpleOperation operator="+" />} />
             <Route path="/dragDropSub" element={<DragDropOperation operator='-' />} />
-            <Route path="/simpleSub" element={<SimpleSub/>} />
+            <Route path="/simpleSub" element={<SimpleOperation operator="-"/>} />
             <Route path="/MultiRain" element={<RainOperation operator="*" />} />
             <Route path="/DivRain" element={<RainOperation operator="/" />} />
-            <Route path="/simpleMulti" element={<SimpleMulti/>} />
-            <Route path="/simpleDiv" element={<SimpleDiv/>} />
+            <Route path="/simpleMulti" element={<SimpleOperation operator="*" />} />
+            <Route path="/simpleDiv" element={<SimpleOperation operator="/" />} />
           </Routes>
         </main>
         <Footer />
