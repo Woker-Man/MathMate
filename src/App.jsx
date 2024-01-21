@@ -1,9 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import AdditionPage from './pages/AdditionPage';
-import SubtractionPage from './pages/SubtractionPage';
-import MultiplicationPage from './pages/MultiplicationPage';
-import DivisionPage from './pages/DivisionPage';
-import SimpleAdd from './pages/SimpleAdd';
+import OperationPage from './pages/OperationPage.jsx'
 import DragDropOperation from './pages/DragDropOperation.jsx'
 import SimpleSub from './pages/SimpleSub';
 import RainOperation from './pages/RainOperation.jsx';
@@ -24,10 +20,10 @@ const App = ()=>{
         <main>
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/addition" element={<AdditionPage />} />
-            <Route path="/subtraction" element={<SubtractionPage />} />
-            <Route path="/multiplication" element={<MultiplicationPage />} />
-            <Route path="/division" element={<DivisionPage />} />
+            <Route path="/addition" element={<OperationPage operator="+" />} />
+            <Route path="/subtraction" element={<OperationPage operator="-" />} />
+            <Route path="/multiplication" element={<OperationPage operator="*" />} />
+            <Route path="/division" element={<OperationPage operator="/" />} />
             <Route path="/dragDropAdd" element={<DragDropOperation operator='+' />} />
             <Route path="/simpleAdd" element={<SimpleAdd />} />
             <Route path="/dragDropSub" element={<DragDropOperation operator='-' />} />
