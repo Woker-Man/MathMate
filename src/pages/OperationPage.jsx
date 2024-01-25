@@ -1,23 +1,25 @@
 // src/pages/AdditionPage.js
 import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import './styles/Addition.css';
 function OperationPage({operator}) {
   const navigate = useNavigate();
+  const [operationName,setOperationName]= useState("Operation")
 
   const goToSimple = () => {
     // Use navigate('/simpleAdd') to navigate to SimpleAdd Page
     switch(operator) {
         case "+":
-        navigate('/simpleAdd');
+        navigate('/simple-add');
         break;
         case "-":
-        navigate('/simplSub');
+        navigate('/simple-sub');
         break;
         case "*":
-        navigate('/simpleMulti');
+        navigate('/simple-multi');
         break;
         case "/":
-        navigate('/simpleDiv');
+        navigate('/simple-div');
         break;
         default:
         console.log("Unknown Operator")
@@ -28,16 +30,16 @@ function OperationPage({operator}) {
     // Use navigate('/dragDropAdd') to navigate to DragDropAdd Page
     switch(operator) {
         case "+":
-        navigate('/dragDropAdd');
+        navigate('/drag-drop-add');
         break;
         case "-":
-        navigate('/dragDropSub');
+        navigate('/drag-drop-sub');
         break;
         case "*":
-        navigate('/MultiRain');
+        navigate('/drag-drop-multi');
         break;
         case "/":
-        navigate('/DivRain');
+        navigate('/drag-drop-div');
         break;
         default:
         console.log("Unknown Operator")
@@ -48,27 +50,48 @@ function OperationPage({operator}) {
     // Use navigate('/dragDropAdd') to navigate to DragDropAdd Page
     switch(operator) {
         case "+":
-        navigate('/dragDropAdd');
+        navigate('/rain-add');
         break;
         case "-":
-        navigate('/dragDropSub');
+        navigate('/rain-sub');
         break;
         case "*":
-        navigate('/MultiRain');
+        navigate('/rain-multi');
         break;
         case "/":
-        navigate('/DivRain');
+        navigate('/rain-div');
         break;
         default:
         console.log("Unknown Operator")
     }
   };
 
+    useEffect(()=>{
+
+        switch(operator) {
+            case "+":
+            setOperationName("Addition")
+            break;
+            case "-":
+            setOperationName("Subtraction")
+            break;
+            case "*":
+            setOperationName("Multiplication")
+            break;
+            case "/":
+            setOperationName("Division")
+            break;
+            default:
+            console.log("Unknown Operator")
+        }
+
+    },[])
+
 
   return (
     <div>
       <header className='header'>
-      <h1 className='head'>Addition Page</h1>
+      <h1 className='head'>{operationName} Page</h1>
       </header>
     <div className="Addition">
 
