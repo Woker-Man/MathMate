@@ -22,14 +22,14 @@ const App = ()=>{
             <Route path="/subtraction" element={<OperationPage operator="-" />} />
             <Route path="/multiplication" element={<OperationPage operator="*" />} />
             <Route path="/division" element={<OperationPage operator="/" />} />
-            <Route path="/dragDropAdd" element={<DragDropOperation operator='+' />} />
-            <Route path="/simpleAdd" element={<SimpleOperation operator="+" />} />
-            <Route path="/dragDropSub" element={<DragDropOperation operator='-' />} />
-            <Route path="/simpleSub" element={<SimpleOperation operator="-"/>} />
-            <Route path="/MultiRain" element={<RainOperation operator="*" />} />
-            <Route path="/DivRain" element={<RainOperation operator="/" />} />
-            <Route path="/simpleMulti" element={<SimpleOperation operator="*" />} />
-            <Route path="/simpleDiv" element={<SimpleOperation operator="/" />} />
+            <Route path="/drag-drop-add" element={<DragDropOperation operator='+' />} />
+            <Route path="/simple-add" element={<SimpleOperation operator="+" />} />
+            <Route path="/drag-drop-sub" element={<DragDropOperation operator='-' />} />
+            <Route path="/simple-sub" element={<SimpleOperation operator="-"/>} />
+            <Route path="/rain-multi" element={<RainOperation operator="*" />} />
+            <Route path="/rain-div" element={<RainOperation operator="/" />} />
+            <Route path="/simple-multi" element={<SimpleOperation operator="*" />} />
+            <Route path="/simple-div" element={<SimpleOperation operator="/" />} />
           </Routes>
         </main>
         <Footer />

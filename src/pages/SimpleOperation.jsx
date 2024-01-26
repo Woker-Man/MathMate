@@ -10,6 +10,8 @@ const SimpleOperation= ({operator}) => {
   const [rangeEnd, setRangeEnd] = useState(0);
   const [num1, setNum1] = useState(1);
   const [num2, setNum2] = useState(5);
+  const [numLeft,setNumLeft] =  useState(0);
+  const [numRight,setNumRight] = useState(0);
   const [userAnswer, setUserAnswer] = useState('');
   const [isCorrect, setIsCorrect] = useState(null);
   const [normalScore, setNormalScore] = useState(0);
@@ -79,6 +81,8 @@ const SimpleOperation= ({operator}) => {
     b=correctAnswer-2;
     c=correctAnswer+1;
     allOptions = [a,b,c,correctAnswer].sort(() => Math.random() - 0.5);
+    setNumLeft(newNum1);
+    setNumRight(newNum2);
 
     break;
     case "-":
@@ -87,6 +91,8 @@ const SimpleOperation= ({operator}) => {
     b=newNum1-2;
     c=newNum1+1;
     allOptions = [a,b,c,newNum1].sort(() => Math.random() - 0.5);
+    setNumLeft(newNum1+newNum2);
+    setNumRight(newNum2);
     break;
     case "*":
     correctAnswer = newNum1 * newNum2;
@@ -94,15 +100,19 @@ const SimpleOperation= ({operator}) => {
     b=correctAnswer-2;
     c=correctAnswer+1;
     allOptions = [a,b,c,correctAnswer].sort(() => Math.random() - 0.5);
+    setNumLeft(newNum1);
+    setNumRight(newNum2);
 
     
     break;
     case "/":
-    correctAnswer = newNum1 + newNum2;
+    correctAnswer = newNum1 / newNum2;
     a=newNum1-1;
     b=newNum1-2;
     c=newNum1+1;
     allOptions = [a,b,c,newNum1].sort(() => Math.random() - 0.5);
+    setNumLeft(newNum1*newNum2);
+    setNumRight(newNum2);
     break;
     default:
 	console.log("Unknown Operator")
@@ -123,23 +133,23 @@ const SimpleOperation= ({operator}) => {
     userEnteredAnswer = parseInt(selectedOption, 10);
    break;
    case "-":
-    correctAnswer = num1 + num2;
+    correctAnswer = (num1+num2) - num2;
     userEnteredAnswer = parseInt(selectedOption, 10);
    break;
    case "*":
     correctAnswer = num1 * num2;
     userEnteredAnswer = parseInt(selectedOption, 10);
-
    break;
    case "/":
-    correctAnswer = num1 + num2;
+    correctAnswer = num1;
     userEnteredAnswer = parseInt(selectedOption, 10);
     break;
     default:
     console.log("Unknown operator")
     }
 
-    const newIsCorrect = userEnteredAnswer === num1;
+    console.log(num1,num2,correctAnswer)
+    const newIsCorrect = userEnteredAnswer === correctAnswer;
 
     setIsCorrect(newIsCorrect);
 
@@ -203,7 +213,7 @@ const SimpleOperation= ({operator}) => {
       </center>
       <div className={`container ${animateWrong ? 'wrong-answer-animation' : ''} ${animateCorrect ? 'correct-answer-animation' : ''}`}>
         <h1 className="font-style">
-          {num1*num2} <span>{operationSymbol}</span> {num2} ={' '}
+          {numLeft} <span>{operationSymbol}</span> {numRight} ={' '}
           {options.map((option, index) => (
   <button 
     key={index}
