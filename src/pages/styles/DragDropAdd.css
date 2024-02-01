@@ -20,7 +20,16 @@ body {
     font-size:20px;
     /* font-weight: bold; */
 }
-
+.cool-style {
+    background-image: url("https://wallpapercave.com/wp/wp2912718.png");
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+  }
+  .cool-style-disabled {
+    pointer-events: none;
+    background-image: none;
+  }
 #maxTarget {
     width: 150px;
     height: 50px;
@@ -182,5 +191,13 @@ body {
   
   .submit-button:hover::before {
     transform: scale(1.5);
+  }
+  /* Inside Simple.css */
+
+  
+  .plus-sign {
+    margin: 0 10px;
+    font-size: 24px;
+    line-height: 1;
   }
   

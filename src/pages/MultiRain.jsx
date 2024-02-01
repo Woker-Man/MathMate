@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './styles/MultiRain.css';
 
-function MultiRain() {
+function MultiRain({ isBackgroundColorChanged, handleBackgroundColorChange }) {
   const [score, setScore] = useState(0);
   const [equations, setEquations] = useState([]);
   const [userAnswer, setUserAnswer] = useState('');
@@ -83,7 +83,7 @@ function MultiRain() {
   }, [equations, userAnswer, score, timer]);
 
   return (
-    <div className="MultiRain" style={containerStyle}>
+    <div className={`MultiRain container-style ${isBackgroundColorChanged ? 'background-changed' : ''} ${isBackgroundColorChanged ? 'cool-style-disabled' : 'cool-style'}`} style={isBackgroundColorChanged ? null : containerStyle}>
       <h1>Multiplication Rain</h1>
       <div className="game-container">
         {[...Array(10)].map((_, rowIndex) => (

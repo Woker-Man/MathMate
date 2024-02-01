@@ -6,6 +6,10 @@
   background-position: center;
   height: 100vh;
 }
+.cool-style-disabled {
+  pointer-events: none;
+  background-image: none;
+}
 
 .cool-style .font-style {
   color: #ef1957;
@@ -34,6 +38,52 @@
   font-family: 'Press Start 2P', cursive; 
 
 }
+
+.apple-container {
+  display: flex;
+  flex-wrap: wrap; /* Allow items to wrap onto multiple lines */
+  justify-content: center;
+  gap: 20px; /* Spacing between apples */
+  position: relative;
+  top: -80px;
+}
+
+/* Apple Styles */
+.apple {
+  width: 50px; /* Adjust the width of the apple */
+  height: 50px; /* Maintain aspect ratio */
+  filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.5)); /* Add a drop shadow */
+  transition: transform 0.3s ease; /* Smooth transition on hover */
+}
+
+.apple:hover {
+  transform: scale(1.1); /* Enlarge the apple on hover */
+}
+
+.apple::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(rgba(255, 255, 255, 0.8), transparent); /* Add a radial gradient overlay */
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.3s ease; /* Smooth transition for the overlay */
+}
+
+.apple:hover::after {
+  opacity: 1; /* Show the overlay on hover */
+}
+
+.box {
+  display: flex;
+  flex-wrap: wrap;
+  width: 350px;
+}
+
+
 
 .cool-style #simple_addition h1 {
   font-size: 3em;
@@ -98,4 +148,22 @@
 
 .cool-container-button.incorrect::before {
   transform: scale(0); /* Reset pulsating effect on incorrect answer */
+}
+#text1{
+  position: relative;
+  top: -94px;
+}
+#text2{
+  position: relative;
+  top: -90px;
+}
+#text3{
+  position: relative;
+  top: -60px;
+}
+.plus-sign{
+  position: relative;
+  font-family:  'Press Start 2P', cursive;
+  font-size: 60px;
+  top: 20px;
 }

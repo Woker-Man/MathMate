@@ -1,9 +1,11 @@
+
 body {
   font-family: 'Press Start 2P', cursive; 
   margin: 0;
   padding: 0;
-  background-image: url('https://wallpaperaccess.com/full/669246.jpg'); /* Replace with your actual path */
+  background-image: url('https://wallpaperaccess.com/full/669246.jpg'); 
   background-size: cover;
+  
 }
 
 .App-header {
@@ -23,7 +25,7 @@ body {
 
 .App-footer {
   /* background: linear-gradient(135deg,lime, #73a5ff); */
-  padding: 10px;
+  /* padding: 10px; */
   color: #121212;
   position: fixed;
   bottom: 0;
@@ -32,14 +34,20 @@ body {
   /* opacity: 0.2; */
   font-size: larger;
   font-weight: bolder;
-
 }
 
 .footer-content {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
 }
+
+.footer-text {
+  margin-left: auto; /* Push the text to the right */
+  margin-right: auto; /* Push the text to the left */
+}
+
+
 
 .footer-btn {
   background: linear-gradient(135deg, #fddb92, #f68a5c); /* Gradient button background - warm orange */
@@ -118,9 +126,13 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle box shadow */
   transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease; /* Smooth transitions */
   position: relative;
-  left: -600px;
-  /* top: -600px; */
+  /* left: -600px; */
+  top: -10px;
   color: white;
+}
+.footer-text{
+  position:relative;
+  /* left: 150px; */
 }
 
 .App-footer a:hover {
@@ -129,3 +141,8 @@ body {
   transform: translateY(-2px); /* Move the button up slightly on hover */
 }
 
+.switch{
+  position: relative;
+  left: 900px;
+  top: -10px;
+}

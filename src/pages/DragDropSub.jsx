@@ -1,7 +1,7 @@
 import  { useEffect } from 'react';
 import './styles/DragDropAdd.css';
 
-const DragDropSub = () => {
+const DragDropSub = ({ isBackgroundColorChanged, handleBackgroundColorChange }) => {
   var symbols = ["apple", "banana", "orange", "grape", "pencil"];
   var targetFruit = "apple";
   var basketCounter = 0;
@@ -210,7 +210,7 @@ const DragDropSub = () => {
   }, []);
 
   return (
-    <div style={containerStyle}>
+    <div className={`container-style ${isBackgroundColorChanged ? 'background-changed' : ''} ${isBackgroundColorChanged ? 'cool-style-disabled' : 'cool-style'}`} style={isBackgroundColorChanged ? null : containerStyle} >
       <div className="container" id="basket">
       
         Basket: 0

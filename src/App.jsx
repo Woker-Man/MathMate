@@ -16,10 +16,20 @@ import SimpleMulti from './pages/SimpleMulti';
 import SimpleDiv from './pages/SimpleDiv';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
+import { Form } from 'react-bootstrap';
 import './App.css';
 
 function App() {
   const [showMathButtons, setShowMathButtons] = useState(true);
+  const [isBackgroundColorChanged, setIsBackgroundColorChanged] = useState(false);
+  const fixedColor = 'lightblue'; // Replace with your desired fixed color
+
+  const handleBackgroundColorChange = () => {
+    setIsBackgroundColorChanged((prevValue) => !prevValue);
+    document.body.style.backgroundImage = isBackgroundColorChanged ? '' : 'none';
+    // var alter=document.getElementsByClassName('cool-style');
+    // alter.style.backgroundImage='';
+  };
 
   return (
     <DndProvider backend={HTML5Backend}>
@@ -30,7 +40,7 @@ function App() {
             {/* <p>Your user-friendly and inclusive platform for learning mathematics.</p> */}
           </header>
         )}
-        <main>
+        <main style={{ backgroundColor: isBackgroundColorChanged ? fixedColor : '' }}>
           <div className="container">
             {/* Conditionally render math buttons based on state */}
             {showMathButtons && (
@@ -71,32 +81,43 @@ function App() {
             <Route path="/subtraction" element={<SubtractionPage />} />
             <Route path="/multiplication" element={<MultiplicationPage />} />
             <Route path="/division" element={<DivisionPage />} />
-            <Route path="/dragDropAdd" element={<DragDropAdd />} />
-            <Route path="/simpleAdd" element={<SimpleAdd />} />
-            <Route path="/dragDropSub" element={<DragDropSub />} />
-            <Route path="/simpleSub" element={<SimpleSub/>} />
-            <Route path="/MultiRain" element={<MultiRain/>} />
-            <Route path="/DivRain" element={<DivRain/>} />
-            <Route path="/simpleMulti" element={<SimpleMulti/>} />
-            <Route path="/simpleDiv" element={<SimpleDiv/>} />
+            <Route path="/dragDropAdd" element={<DragDropAdd isBackgroundColorChanged={isBackgroundColorChanged} handleBackgroundColorChange={handleBackgroundColorChange}/>} />
+            <Route
+              path="/simpleAdd"
+              element={<SimpleAdd isBackgroundColorChanged={isBackgroundColorChanged} handleBackgroundColorChange={handleBackgroundColorChange} />}
+            />
+            <Route path="/dragDropSub" element={<DragDropSub isBackgroundColorChanged={isBackgroundColorChanged} handleBackgroundColorChange={handleBackgroundColorChange}/>} />
+            <Route path="/simpleSub" element={<SimpleSub isBackgroundColorChanged={isBackgroundColorChanged} handleBackgroundColorChange={handleBackgroundColorChange}/>} />
+            <Route path="/MultiRain" element={<MultiRain isBackgroundColorChanged={isBackgroundColorChanged} handleBackgroundColorChange={handleBackgroundColorChange}/>} />
+            <Route path="/DivRain" element={<DivRain isBackgroundColorChanged={isBackgroundColorChanged} handleBackgroundColorChange={handleBackgroundColorChange}/>} />
+            <Route path="/simpleMulti" element={<SimpleMulti isBackgroundColorChanged={isBackgroundColorChanged} handleBackgroundColorChange={handleBackgroundColorChange}/>} />
+            <Route path="/simpleDiv" element={<SimpleDiv isBackgroundColorChanged={isBackgroundColorChanged} handleBackgroundColorChange={handleBackgroundColorChange}/>} />
           </Routes>
         </main>
         <footer className="App-footer">
-  <div className="footer-content">
-    {!showMathButtons && (
-      <>
-        <Link
-          to="/"
-          className="btn btn-primary mx-4"
-          onClick={() => setShowMathButtons(true)}
-        >
-          Back
-        </Link>
-      </>
-    )}
-    <p>&copy; 2023 MathMate. All rights reserved.</p>
-  </div>
-</footer>
+          <div className="footer-content">
+            {!showMathButtons && (
+              <>
+                <Link
+                  to="/"
+                  className="btn btn-primary mx-4"
+                  onClick={() => setShowMathButtons(true)}
+                >
+                  Back
+                </Link>
+                <button
+                  className="btn btn-warning mx-4 switch"
+                  onClick={handleBackgroundColorChange}
+                >
+                  {isBackgroundColorChanged ? 'Restore Normal Color' : 'Change Background Color'}
+                </button>
+              </>
+            )}
+            {showMathButtons&&(<p className='footer-text'>&copy; 2023 MathMate. All rights reserved.</p>)}
+            
+          </div>
+        </footer>
+
 
       </Router>
     </DndProvider>

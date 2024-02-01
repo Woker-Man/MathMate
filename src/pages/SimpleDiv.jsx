@@ -2,8 +2,15 @@
 
 import React, { useState, useEffect } from 'react';
 import './styles/Simple.css';
+import appleImage from '/images/apple.png';
+import orangeImage from '/images/orange.png';
+import bananaImage from '/images/banana.png';
+import mangoImage from '/images/grape.png';
 
-const SimpleDiv= () => {
+const fruitImages = [appleImage, orangeImage, bananaImage, mangoImage];
+const totalFruits = fruitImages.length;
+
+const SimpleDiv= ({ isBackgroundColorChanged, handleBackgroundColorChange }) => {
   const [rangeStart, setRangeStart] = useState(1);
   const [rangeEnd, setRangeEnd] = useState(0);
   const [num1, setNum1] = useState(1);
@@ -18,6 +25,8 @@ const SimpleDiv= () => {
   const [options, setOptions] = useState([]);
   const [animateWrong, setAnimateWrong] = useState(false);
   const [animateCorrect, setAnimateCorrect] = useState(false);
+  const [currentFruitIndex, setCurrentFruitIndex] = useState(0);
+
   const containerStyle = {
     backgroundImage: 'url("https://wallpaperset.com/w/full/2/3/4/323175.jpg")',
     backgroundSize: 'cover',
@@ -66,8 +75,8 @@ const SimpleDiv= () => {
     //   }
     // }
 
-    const newNum1 = Math.floor(Math.random() * 5) + newRangeStart;
-    const newNum2 = Math.floor(Math.random() * 5) + newRangeStart;
+    const newNum1 = Math.floor(Math.random() * 10) + 1
+    const newNum2 = Math.floor(Math.random() * 10) + 1
     const correctAnswer = newNum1 + newNum2;
     const a=newNum1-1;
     const b=newNum1-2;
@@ -79,6 +88,27 @@ const SimpleDiv= () => {
     setUserAnswer('');
     setIsCorrect(null);
     setOptions(allOptions);
+  };
+
+  
+  useEffect(() => {
+    setCurrentFruitIndex(prevIndex => (prevIndex +1) % totalFruits);
+  }, [num1, num2]);
+
+  const generateFruit = (count) => {
+    const fruitRows = [];
+    for (let i = 0; i < num2; i++) {
+      const fruits = [];
+      for (let j = 0; j < num1; j++) {
+        fruits.push(<img key={j} src={fruitImages[(currentFruitIndex) % totalFruits]} alt="fruit" className="apple" />);
+      }
+      fruitRows.push(
+        <div key={i} className="box" style={{ border: '2px solid black', borderRadius: '10px', padding: '10px', margin: '5px', display: 'flex', justifyContent: 'center' }}>
+          {fruits}
+        </div>
+      );
+    }
+    return fruitRows;
   };
 
   const checkAnswer = (selectedOption) => {
@@ -117,34 +147,38 @@ const SimpleDiv= () => {
   }, []);
 
   return (
-    <div id="simple_addition" className="container-style cool-style" style={containerStyle}>
+    <div id="simple_addition" className={`container-style ${isBackgroundColorChanged ? 'background-changed' : ''} ${isBackgroundColorChanged ? 'cool-style-disabled' : 'cool-style'}`} style={isBackgroundColorChanged ? null : containerStyle}>
       <h2 className='score1'>Normal Score: {normalScore}</h2> <h2 className='score1'>High Score: {highScore}</h2>
-      <h1 className="font-style">Simple Division</h1>
+      <h1 id="text1" className="font-style">Simple Division</h1>
       <center>
-        <h2 className='type'>Divide the following numbers:</h2>
+        <h2 id="text2" className='type'>Divide the following numbers:</h2>
       </center>
+      <div className="apple-container" style={{ width: '100%' }}>
+        <div className="box-container" style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+          {generateFruit(num1)}
+        </div>
+      </div>
       <div className={`container ${animateWrong ? 'wrong-answer-animation' : ''} ${animateCorrect ? 'correct-answer-animation' : ''}`}>
-        <h1 className="font-style">
+        <h1 id="text3" className="font-style">
           {num1*num2} <span>÷</span> {num2} ={' '}
           {options.map((option, index) => (
-  <button 
-    key={index}
-    onClick={() => {
-      setUserAnswer(option);
-      checkAnswer(option);
-    }}
-    className={`cool-container-button ${userAnswer === option && isCorrect ? 'correct' : ''} ${
-      userAnswer === option && !isCorrect ? 'incorrect' : ''
-    }`}
-    disabled={userAnswer !== ''}
-  >
-    {option}
-  </button>
-))}
+            <button 
+              key={index}
+              onClick={() => {
+                setUserAnswer(option);
+                checkAnswer(option);
+              }}
+              className={`cool-container-button ${userAnswer === option && isCorrect ? 'correct' : ''} ${userAnswer === option && !isCorrect ? 'incorrect' : ''}`}
+              disabled={userAnswer !== ''}
+            >
+              {option}
+            </button>
+          ))}
         </h1>
       </div>
     </div>
   );
+  
 };
 
 export default SimpleDiv;
