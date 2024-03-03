@@ -20,10 +20,18 @@ const dict3 = {
   "/":"÷",
 }
 
+const verbs = {
+  "+":"Add",
+  "-":"Subtract",
+  "*":"Multiply",
+  "/":"Divide",
+}
+
 const wordMappings = {
     lower:dict1,
     capitalized:dict2,
     equationSymbols:dict3,
+    verbs:verbs
 }
 
 export default wordMappings

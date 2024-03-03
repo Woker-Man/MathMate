@@ -1,11 +1,9 @@
 
 import React, { useState, useEffect } from 'react';
+import wordMappings from './utils/wordMappings'
 import './styles/Simple.css';
 
 const SimpleOperation= ({operator}) => {
-  const [operationNameNoun,setOperationNameNoun] = useState("Operation")
-  const [operationNameVerb,setOperationNameVerb] = useState("Operate")
-  const [operationSymbol,setOperationSymbol] = useState(".")
   const [rangeStart, setRangeStart] = useState(1);
   const [rangeEnd, setRangeEnd] = useState(0);
   const [num1, setNum1] = useState(1);
@@ -61,14 +59,6 @@ const SimpleOperation= ({operator}) => {
     const newRangeEnd = newRangeStart + 4;
     setRangeStart(newRangeStart);
     setRangeEnd(newRangeEnd);
-
-    // const uniqueOptions = [];
-    // while (uniqueOptions.length < 3) {
-    //   const randomNum = Math.floor(Math.random() * 10) + newRangeStart;
-    //   if (!uniqueOptions.includes(randomNum)) {
-    //     uniqueOptions.push(randomNum);
-    //   }
-    // }
 
     const newNum1 = Math.floor(Math.random() * 5) + newRangeStart;
     const newNum2 = Math.floor(Math.random() * 5) + newRangeStart;
@@ -178,42 +168,18 @@ const SimpleOperation= ({operator}) => {
 
   useEffect(() => {
     generateRandomNumbers();
-    switch(operator){
-	case "+":
-	setOperationNameNoun("Addition")
-	setOperationNameVerb("Add")
-	setOperationSymbol("+")
-	break;
-	case "-":
-	setOperationNameNoun("Subtraction")
-	setOperationNameVerb("Subtract")
-	setOperationSymbol("-")
-	break;
-	case "*":
-	setOperationNameNoun("Multiplication")
-	setOperationNameVerb("Multiply")
-	setOperationSymbol("X")
-	break;
-	case "/":
-	setOperationNameNoun("Division")
-	setOperationNameVerb("Divide")
-	setOperationSymbol("÷")
-	break;
-	default:
-	console.log("Unknown Operator")
-    }
   }, []);
 
   return (
     <div id="simple_addition" className="container-style cool-style" style={containerStyle}>
       <h2 className='score1'>Normal Score: {normalScore}</h2> <h2 className='score1'>High Score: {highScore}</h2>
-      <h1 className="font-style">Simple {operationNameNoun}</h1>
+      <h1 className="font-style">Simple {wordMappings.capitalized[operator]}</h1>
       <center>
-        <h2 className='type'>{operationNameVerb} the following numbers:</h2>
+        <h2 className='type'>{wordMappings.verbs[operator]} the following numbers:</h2>
       </center>
       <div className={`container ${animateWrong ? 'wrong-answer-animation' : ''} ${animateCorrect ? 'correct-answer-animation' : ''}`}>
         <h1 className="font-style">
-          {numLeft} <span>{operationSymbol}</span> {numRight} ={' '}
+          {numLeft} <span>{wordMappings.equationSymbols[operator]}</span> {numRight} ={' '}
           {options.map((option, index) => (
   <button 
     key={index}
