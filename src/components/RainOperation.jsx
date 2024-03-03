@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import wordMappings from './utils/wordMappings.js'
 import './styles/MultiRain.css';
 
 const RainOperation = ({operator})=>{
@@ -6,7 +7,6 @@ const RainOperation = ({operator})=>{
   const [equations, setEquations] = useState([]);
   const [userAnswer, setUserAnswer] = useState('');
   const [timer, setTimer] = useState(null);
-  const [operationName,setOperationName] = useState("Operation") 
 
   const containerStyle = {
     backgroundImage: 'url("https://cdn.wallpapersafari.com/59/52/0kjwKe.jpg")',
@@ -36,18 +36,6 @@ const RainOperation = ({operator})=>{
       }
     };
 
-    let equationSymbol = "."
-    switch (operator) {
-        case "*":
-            equationSymbol = "X"
-            setOperationName("Multiplication")
-            break
-        case "/":
-            equationSymbol = "÷"
-            setOperationName("Division")
-            break
-    }
-
     window.addEventListener('keydown', handleKeyPress);
 
     const generateNewEquation = () => {
@@ -74,7 +62,7 @@ const RainOperation = ({operator})=>{
     }
 
       return {
-        equation: `${num1} ${equationSymbol} ${num2}`,
+        equation: `${num1} ${wordMappings.equationSymbols[operator]} ${num2}`,
         answer,
         column: Math.floor(Math.random() * 10),
         row: fixedRow, // Fixed row to always start from the top
@@ -117,7 +105,7 @@ const RainOperation = ({operator})=>{
 
   return (
     <div className="MultiRain" style={containerStyle}>
-      <h1 style={container}>{operationName} Rain</h1>
+      <h1 style={container}>{wordMappings.capitalized[operator]} Rain</h1>
       <div className="game-container" >
         {[...Array(10)].map((_, rowIndex) => (
           <React.Fragment key={rowIndex}>
