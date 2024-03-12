@@ -34,23 +34,6 @@ body {
   /* opacity: 0.2; */
   font-size: larger;
   font-weight: bolder;
-<<<<<<< Updated upstream
-}
-
-.footer-content {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-.footer-text {
-  margin-left: auto; /* Push the text to the right */
-  margin-right: auto; /* Push the text to the left */
-}
-
-
-
-=======
   height: 70px;
 }
 
@@ -64,7 +47,6 @@ body {
   left: 555px;
   top: -60px;
 }
->>>>>>> Stashed changes
 .footer-btn {
   background: linear-gradient(135deg, #fddb92, #f68a5c); /* Gradient button background - warm orange */
   border: none;
@@ -141,13 +123,8 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle box shadow */
   transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease; /* Smooth transitions */
   position: relative;
-<<<<<<< Updated upstream
-  /* left: -600px; */
-  top: -10px;
-=======
   left: 40px;
   top: -30px;
->>>>>>> Stashed changes
   color: white;
 }
 .footer-text{

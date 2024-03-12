@@ -1,4 +1,4 @@
-import React from 'react';
+
 
 export const addition = [
     "Maria bought ___ baskets of strawberries and ___ crates of oranges. Each basket contains ___ strawberries, and each crate contains ___ oranges. How many fruits did Maria buy in total?",

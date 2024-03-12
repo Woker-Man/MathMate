@@ -52,6 +52,7 @@ body {
     text-align: center;
     /* line-height: 50px; */
     font-size: 35px;
+    color: black;
     font-family: 'Schoolbell', cursive;
 }
 
@@ -65,6 +66,7 @@ body {
     text-align: center;
     /* line-height: 250px; */
     font-size: 35px;
+    color: black;
     font-family: 'Schoolbell', cursive;
 }
 
@@ -169,8 +171,8 @@ body {
     overflow: hidden;
     position: relative;
     transition: background-color 0.3s;
-    left: 900px;
-    top: 20px;
+    left: 294px;
+    top: -310px;
   }
   
   .submit-button:hover {

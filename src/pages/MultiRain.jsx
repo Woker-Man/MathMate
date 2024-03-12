@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import './styles/MultiRain.css';
-
 function MultiRain({ isBackgroundColorChanged, handleBackgroundColorChange }) {
   const [score, setScore] = useState(0);
   const [equations, setEquations] = useState([]);

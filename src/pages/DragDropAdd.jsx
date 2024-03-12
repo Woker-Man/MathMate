@@ -1,7 +1,7 @@
 import  { useEffect } from 'react';
 import './styles/DragDropAdd.css';
-
-const DragDropAdd = ({ isBackgroundColorChanged, handleBackgroundColorChange }) => {
+import PropTypes from 'prop-types';
+const DragDropAdd = ({ isBackgroundColorChanged}) => {
   var symbols = ["apple", "banana", "orange", "grape", "pencil"];
   var targetFruit = "apple";
   var basketCounter = 0;
@@ -239,5 +239,8 @@ const DragDropAdd = ({ isBackgroundColorChanged, handleBackgroundColorChange }) 
     </div>
   );
 };
-
+DragDropAdd.propTypes = {
+  isBackgroundColorChanged: PropTypes.bool.isRequired,
+  handleBackgroundColorChange: PropTypes.func.isRequired
+};
 export default DragDropAdd;

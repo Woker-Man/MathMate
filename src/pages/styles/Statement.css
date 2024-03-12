@@ -8,11 +8,11 @@
   position: relative; /* Added position relative */
 }
 
-.background-changed {
+/* .background-changed {
   background-image: url("https://webstockreview.net/images/morning-clipart-sunny-landscape-4.jpg");
   background-size: cover;
   background-position: center;
-}
+} */
 
 .cool-style {
   background-image: url("https://wallpapercave.com/wp/wp2912718.png");
@@ -76,7 +76,7 @@
   border-color: #ff6f61;
 }
 
-.submit-button {
+.submit-buttons {
   background-color: #ff6f61;
   color: #fff;
   padding: 20px 40px; /* Increased padding */
@@ -88,7 +88,7 @@
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Added box shadow */
 }
 
-.submit-button:hover {
+.submit-buttons:hover {
   background-color: #ff524f;
   transform: scale(1.1); /* Added scaling effect on hover */
 }

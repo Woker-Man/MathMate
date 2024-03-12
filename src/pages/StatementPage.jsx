@@ -144,7 +144,7 @@ function division() {
       <p>Correct Result: {correctResult}</p>
       <form onSubmit={handleSubmit}>
         <input type="text" value={userAnswer} onChange={(e) => setUserAnswer(e.target.value)} />
-        <button type="submit">Submit</button>
+        <button className="submit-buttons"type="submit">Submit</button>
       </form>
       <p>{feedbackMessage}</p>
     </div>

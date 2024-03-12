@@ -17,7 +17,7 @@ import SimpleDiv from './pages/SimpleDiv';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import Statement from './pages/StatementPage';
-import { Form } from 'react-bootstrap';
+// import from 'react-bootstrap';
 import './App.css';
 
 function App() {
