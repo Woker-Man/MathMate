@@ -27,8 +27,11 @@ body {
     height: 100vh;
   }
   .cool-style-disabled {
-    pointer-events: none;
+    /* pointer-events: none; */
     background-image: none;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
   }
 #maxTarget {
     width: 150px;
