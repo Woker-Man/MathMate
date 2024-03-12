@@ -16,6 +16,7 @@ import SimpleMulti from './pages/SimpleMulti';
 import SimpleDiv from './pages/SimpleDiv';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
+import Statement from './pages/StatementPage';
 import { Form } from 'react-bootstrap';
 import './App.css';
 
@@ -73,6 +74,13 @@ function App() {
                 >
                   Division
                 </Link>
+                <Link
+                  to="/statement"
+                  className="btn btn-danger mx-4"
+                  onClick={() => setShowMathButtons(false)}
+                >
+                  Statement
+                </Link>
               </>
             )}
           </div>
@@ -92,6 +100,7 @@ function App() {
             <Route path="/DivRain" element={<DivRain isBackgroundColorChanged={isBackgroundColorChanged} handleBackgroundColorChange={handleBackgroundColorChange}/>} />
             <Route path="/simpleMulti" element={<SimpleMulti isBackgroundColorChanged={isBackgroundColorChanged} handleBackgroundColorChange={handleBackgroundColorChange}/>} />
             <Route path="/simpleDiv" element={<SimpleDiv isBackgroundColorChanged={isBackgroundColorChanged} handleBackgroundColorChange={handleBackgroundColorChange}/>} />
+            <Route path="/statement" element={<Statement isBackgroundColorChanged={isBackgroundColorChanged} handleBackgroundColorChange={handleBackgroundColorChange}/>} />
           </Routes>
         </main>
         <footer className="App-footer">
