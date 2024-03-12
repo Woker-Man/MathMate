@@ -34,6 +34,7 @@ body {
   /* opacity: 0.2; */
   font-size: larger;
   font-weight: bolder;
+<<<<<<< Updated upstream
 }
 
 .footer-content {
@@ -49,6 +50,21 @@ body {
 
 
 
+=======
+  height: 70px;
+}
+
+.footer-content {
+  /* display: flex; */
+  /* flex-direction: row; */
+  align-items: center;
+}
+.footer-content p{
+  position: relative;
+  left: 555px;
+  top: -60px;
+}
+>>>>>>> Stashed changes
 .footer-btn {
   background: linear-gradient(135deg, #fddb92, #f68a5c); /* Gradient button background - warm orange */
   border: none;
@@ -111,7 +127,6 @@ body {
 .container a:hover::before {
   transform: scale(2); /* Pulsating effect on hover */
 }
-
 /* Add this style for the back button */
 .App-footer a {
   display: inline-flex;
@@ -126,8 +141,13 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle box shadow */
   transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease; /* Smooth transitions */
   position: relative;
+<<<<<<< Updated upstream
   /* left: -600px; */
   top: -10px;
+=======
+  left: 40px;
+  top: -30px;
+>>>>>>> Stashed changes
   color: white;
 }
 .footer-text{
