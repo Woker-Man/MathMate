@@ -3,20 +3,33 @@
   padding: 20px;
   /* width: 1000px; */
 }
-
+.settings1{
+  position: relative;
+  left: -500px;
+  top: -50px;
+}
 .game-container {
   display: grid;
   grid-template-columns: repeat(10, 1fr) 1fr; /* Add an extra column for numbering */
   grid-template-rows: repeat(10, 1fr);
   margin-top: 20px;
-  font-size: 24px;
+  font-size: 25px;
+  font-weight:900;
   height: 470px; /* Adjust the height as needed to accommodate the entire grid */
   overflow: hidden;
   border: 2px solid #000;
   position: relative;
   width: 1200px;
+  background-color: rgb(244, 232, 128);
+  text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #ff00de, 0 0 70px #ff00de, 0 0 80px #ff00de, 0 0 100px #ff00de, 0 0 150px #ff00de;
 }
-
+.cell{
+  width: 110px;
+  /* background-color: pink; */
+}
+.row-index{
+  font-size: 30px;
+}
 .cell {
   /* border-bottom: 1px solid #000; Add border for row lines only */
   position: relative;
@@ -26,6 +39,7 @@
   position: absolute;
   right: 0;
   transform: translateY(-50%); /* Center the row numbers vertically */
+  
 }
 
 .equation {
@@ -44,7 +58,6 @@
 input {
   margin-top: 10px;
   padding: 5px;
-  font-size: 16px;
 }
 .last-column {
   /* border-right: 2px solid #000; Add a border to the right for the last column */

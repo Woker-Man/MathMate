@@ -1,7 +1,7 @@
-import  { useEffect } from 'react';
+import  { useEffect,useState } from 'react';
 import './styles/DragDropAdd.css';
-
-const DragDropSub = ({ isBackgroundColorChanged, handleBackgroundColorChange }) => {
+import PropTypes from 'prop-types';
+const DragDropSub = ({ isBackgroundColorChanged}) => {
   var symbols = ["apple", "banana", "orange", "grape", "pencil"];
   var targetFruit = "apple";
   var basketCounter = 0;
@@ -11,10 +11,40 @@ const DragDropSub = ({ isBackgroundColorChanged, handleBackgroundColorChange }) 
   var highScore = 0;
   var draggedSymbol = null;
   var currentSymbolIndex = 0;
-  
+  const [language, setLanguage] = useState('english'); // Initial language
   function shuffleSymbols() {
     symbols.sort(() => Math.random() - 0.5);
   }
+
+  const languages = {
+    english: {
+      submitButton: 'Submit',
+      highScoreText: 'High Score',
+      scoreText: 'Score',
+      basketText: 'Basket',
+      lang:'Language',
+      // Add more language-specific content as needed
+    },
+    hindi: {
+      basketText: 'टोकरी',
+      submitButton: 'प्रस्तुत',
+      highScoreText: 'उच्च स्कोर',
+      scoreText: 'स्कोर',
+      lang:'भाषा',
+      // Add more language-specific content as needed
+    },
+    bengali: {
+      basketText: 'টোকারি',
+      submitButton: 'জমা দিন',
+      highScoreText: 'উচ্চ স্কোর',
+      scoreText: 'স্কোর',
+      lang:'ভাষা',
+    }
+    // Add more languages as needed
+  };
+  const handleLanguageChange = (selectedLanguage) => {
+    setLanguage(selectedLanguage);
+  };
 
   const containerStyle = {
     backgroundImage: 'url("https://static.vecteezy.com/system/resources/previews/000/550/499/original/cartoon-forest-hill-landscape-vector-nature-background-illustration.jpg")',
@@ -208,12 +238,22 @@ const DragDropSub = ({ isBackgroundColorChanged, handleBackgroundColorChange }) 
       document.body.removeEventListener("drag", drag);
     };
   }, []);
-
+  const languageContent = languages[language];
   return (
     <div className={`container-style ${isBackgroundColorChanged ? 'background-changed' : ''} ${isBackgroundColorChanged ? 'cool-style-disabled' : 'cool-style'}`} style={isBackgroundColorChanged ? null : containerStyle} >
+    <div className="dropdown settings">
+        <button className="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+         {languageContent.lang}
+        </button>
+        <ul className="dropdown-menu">
+          <li><button className="dropdown-item" onClick={() => handleLanguageChange('english')}>English</button></li>
+          <li><button className="dropdown-item" onClick={() => handleLanguageChange('hindi')}>Hindi</button></li>
+          <li><button className="dropdown-item" onClick={() => handleLanguageChange('bengali')}>Bengali</button></li>
+        </ul>
+      </div>
       <div className="container" id="basket">
       
-        Basket: 0
+      {languageContent.basketText}: 0
       </div>
       <img src="https://clipart-library.com/img/1078553.png" alt="Basket" className="basket-image" />
       <img src="https://i.pinimg.com/originals/a8/fc/be/a8fcbef17839235c1f092466fdbb361a.png" alt="frame" className="frame"/>
@@ -222,10 +262,10 @@ const DragDropSub = ({ isBackgroundColorChanged, handleBackgroundColorChange }) 
         Max Target: 0
       </div> */}
       <div className="container" id="score">
-        Score: 0
+      {languageContent.scoreText}: 0
       </div>
       <div className="container" id="highScore">
-        High Score: 0
+      {languageContent.highScoreText}: 0
       </div>
       <div className="container" id="box1"></div>
       <div className="container" id="plus" style={addSym}>
@@ -239,9 +279,12 @@ const DragDropSub = ({ isBackgroundColorChanged, handleBackgroundColorChange }) 
       <div className="container" id="fruit">
         {/* fruit: apple */}
       </div>
-      <button onClick={submitAnswer} className='submit-button'>Submit</button>
+      <button onClick={submitAnswer} className='submit-button'>{languageContent.submitButton}</button>
     </div>
   );
 };
-
+DragDropSub.propTypes = {
+  isBackgroundColorChanged: PropTypes.bool.isRequired,
+  handleBackgroundColorChange: PropTypes.func.isRequired
+};
 export default DragDropSub;

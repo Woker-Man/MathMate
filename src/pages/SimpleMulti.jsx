@@ -1,18 +1,16 @@
 // Inside SimpleAdd.js
 
-import React, { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 import './styles/Simple.css';
 import appleImage from '/images/apple.png';
 import orangeImage from '/images/orange.png';
 import bananaImage from '/images/banana.png';
 import mangoImage from '/images/grape.png';
-
+import PropTypes from 'prop-types';
 const fruitImages = [appleImage, orangeImage, bananaImage, mangoImage];
 const totalFruits = fruitImages.length;
 
-const SimpleMulti = ({ isBackgroundColorChanged, handleBackgroundColorChange }) => {
-  const [rangeStart, setRangeStart] = useState(1);
-  const [rangeEnd, setRangeEnd] = useState(0);
+const SimpleMulti = ({ isBackgroundColorChanged }) => {
   const [num1, setNum1] = useState(1);
   const [num2, setNum2] = useState(5);
   const [userAnswer, setUserAnswer] = useState('');
@@ -26,7 +24,42 @@ const SimpleMulti = ({ isBackgroundColorChanged, handleBackgroundColorChange }) 
   const [animateWrong, setAnimateWrong] = useState(false);
   const [animateCorrect, setAnimateCorrect] = useState(false);
   const [currentFruitIndex, setCurrentFruitIndex] = useState(0);
-
+  const [language, setLanguage] = useState('english'); // Initial language
+  const languages = {
+    english: {
+      heading: 'Simple Multiplication',
+      sub:'Multiply the following numbers',
+      submitButton: 'Submit',
+      highScoreText: 'High Score',
+      scoreText: 'Score',
+      basketText: 'Basket',
+      lang:'Language',
+      // Add more language-specific content as needed
+    },
+    hindi: {
+      heading: 'सरल गुणा',
+      sub:'निम्नलिखित संख्याओं को गुणा करें',
+      basketText: 'टोकरी',
+      submitButton: 'प्रस्तुत',
+      highScoreText: 'उच्च स्कोर',
+      scoreText: 'स्कोर',
+      lang:'भाषा',
+      // Add more language-specific content as needed
+    },
+    bengali: {
+      heading: 'সহজ গুণ',
+      sub:'নিম্নলিখিত সংখ্যাগুলি গুণ করুন',
+      basketText: 'টোকারি',
+      submitButton: 'জমা দিন',
+      highScoreText: 'উচ্চ স্কোর',
+      scoreText: 'স্কোর',
+      lang:'ভাষা',
+    }
+    // Add more languages as needed
+  };
+  const handleLanguageChange = (selectedLanguage) => {
+    setLanguage(selectedLanguage);
+  };
   const containerStyle = {
     backgroundImage: 'url("https://www.pixelstalk.net/wp-content/uploads/2016/05/Desktop-kids-wallpapers.png")',
     backgroundSize: 'cover',
@@ -88,7 +121,7 @@ const SimpleMulti = ({ isBackgroundColorChanged, handleBackgroundColorChange }) 
     setCurrentFruitIndex(prevIndex => (prevIndex +1) % totalFruits);
   }, [num1, num2]);
 
-  const generateFruit = (count) => {
+  const generateFruit = () => {
     const fruitRows = [];
     for (let i = 0; i < num2; i++) {
       const fruits = [];
@@ -140,13 +173,23 @@ const SimpleMulti = ({ isBackgroundColorChanged, handleBackgroundColorChange }) 
   useEffect(() => {
     generateRandomNumbers();
   }, []);
-
+  const languageContent = languages[language];
   return (
     <div id="simple_addition" className={`container-style ${isBackgroundColorChanged ? 'background-changed' : ''} ${isBackgroundColorChanged ? 'cool-style-disabled' : 'cool-style'}`} style={isBackgroundColorChanged ? null : containerStyle}>
-      <h2 className='score1'>Normal Score: {normalScore}</h2> <h2 className='score1'>High Score: {highScore}</h2>
-      <h1 id="text1" className="font-style">Simple Multiplication</h1>
+       <div className="dropdown settings4">
+        <button className="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+         {languageContent.lang}
+        </button>
+        <ul className="dropdown-menu">
+          <li><button className="dropdown-item" onClick={() => handleLanguageChange('english')}>English</button></li>
+          <li><button className="dropdown-item" onClick={() => handleLanguageChange('hindi')}>Hindi</button></li>
+          <li><button className="dropdown-item" onClick={() => handleLanguageChange('bengali')}>Bengali</button></li>
+        </ul>
+        </div>
+      <h2 className='score1'>{languageContent.scoreText}: {normalScore}</h2> <h2 className='score1'>{languageContent.highScoreText}: {highScore}</h2>
+      <h1 id="text1" className="font-style">{languageContent.heading}</h1>
       <center>
-        <h2 id="text2" className='type'>Multiply the following numbers:</h2>
+        <h2 id="text2" className='type'>{languageContent.sub}:</h2>
       </center>
       <div className="apple-container" style={{ width: '100%' }}>
         <div className="box-container" style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
@@ -175,5 +218,8 @@ const SimpleMulti = ({ isBackgroundColorChanged, handleBackgroundColorChange }) 
   );
   
 };
-
+SimpleMulti.propTypes = {
+  isBackgroundColorChanged: PropTypes.bool.isRequired,
+  handleBackgroundColorChange: PropTypes.func.isRequired
+};
 export default SimpleMulti;

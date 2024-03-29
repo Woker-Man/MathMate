@@ -13,7 +13,7 @@ const Footer = ()=> {
                 Back
               </Link>
             </>
-          <p>&copy; 2023 MathMate. All rights reserved.</p>
+          <p>&copy; </p>
         </footer>
 
 

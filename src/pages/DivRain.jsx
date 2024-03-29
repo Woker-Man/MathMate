@@ -6,6 +6,35 @@ function DivRain({ isBackgroundColorChanged, handleBackgroundColorChange }) {
   const [equations, setEquations] = useState([]);
   const [userAnswer, setUserAnswer] = useState('');
   const [timer, setTimer] = useState(null);
+  const [language, setLanguage] = useState('english'); // Initial language
+
+  const languages = {
+    english: {
+      answer: 'Your Answer',
+      scoreText: 'Score',
+      lang:'Language',
+      heading:'Division Rain'
+      // Add more language-specific content as needed
+    },
+    hindi: {
+      answer: 'तुम्हारा जवाब',
+      submitButton: 'प्रस्तुत',
+      scoreText: 'स्कोर',
+      lang:'भाषा',
+      heading:'विभाजन बारिश'
+      // Add more language-specific content as needed
+    },
+    bengali: {
+      answer: 'তোমার উত্তর',
+      submitButton: 'জমা দিন',
+      scoreText: 'স্কোর',
+      lang:'ভাষা',
+      heading:'বিভাজন বৃষ্টি'
+    }
+  };
+  const handleLanguageChange = (selectedLanguage) => {
+    setLanguage(selectedLanguage);
+  };
 
   const containerStyle = {
     backgroundImage: 'url("https://cdn.wallpapersafari.com/59/52/0kjwKe.jpg")',
@@ -89,10 +118,20 @@ function DivRain({ isBackgroundColorChanged, handleBackgroundColorChange }) {
       resetTimer();
     };
   }, [equations, userAnswer, score, timer]);
-
+  const languageContent = languages[language];
   return (
     <div className={`MultiRain container-style ${isBackgroundColorChanged ? 'background-changed' : ''} ${isBackgroundColorChanged ? 'cool-style-disabled' : 'cool-style'}`} style={isBackgroundColorChanged ? null : containerStyle} >
-      <h1 style={container}>Division Rain</h1>
+      <h1 style={container}>{languageContent.heading}</h1>
+      <div className="dropdown settings1">
+        <button className="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+         {languageContent.lang}
+        </button>
+        <ul className="dropdown-menu">
+          <li><button className="dropdown-item" onClick={() => handleLanguageChange('english')}>English</button></li>
+          <li><button className="dropdown-item" onClick={() => handleLanguageChange('hindi')}>Hindi</button></li>
+          <li><button className="dropdown-item" onClick={() => handleLanguageChange('bengali')}>Bengali</button></li>
+        </ul>
+      </div>
       <div className="game-container" >
         {[...Array(10)].map((_, rowIndex) => (
           <React.Fragment key={rowIndex}>
@@ -114,7 +153,7 @@ function DivRain({ isBackgroundColorChanged, handleBackgroundColorChange }) {
           </React.Fragment>
         ))}
       </div>
-      <div className="score">Score: {score}</div>
+      <div className="score">{languageContent.scoreText}: {score}</div>
       <input
         type="number"
         placeholder="Your Answer"

@@ -122,7 +122,7 @@ function App() {
                 </button>
               </>
             )}
-            {showMathButtons&&(<p className='footer-text'>&copy; 2023 MathMate. All rights reserved.</p>)}
+            {showMathButtons&&(<p className='footer-text'> </p>)}
             
           </div>
         </footer>

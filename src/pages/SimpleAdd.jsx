@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import './styles/Simple.css';
 import appleImage from '/images/apple.png';
 import orangeImage from '/images/orange.png';
 import bananaImage from '/images/banana.png';
 import mangoImage from '/images/grape.png';
-
+import PropTypes from 'prop-types';
 const fruitImages = [appleImage, orangeImage, bananaImage, mangoImage];
 const totalFruits = fruitImages.length;
 
-const SimpleAdd = ({ isBackgroundColorChanged, handleBackgroundColorChange }) => {
-  const [rangeStart, setRangeStart] = useState(1);
+const SimpleAdd = ({ isBackgroundColorChanged }) => {
   const [rangeEnd, setRangeEnd] = useState(0);
   const [num1, setNum1] = useState(1);
   const [num2, setNum2] = useState(5);
@@ -24,7 +23,36 @@ const SimpleAdd = ({ isBackgroundColorChanged, handleBackgroundColorChange }) =>
   const [animateWrong, setAnimateWrong] = useState(false);
   const [animateCorrect, setAnimateCorrect] = useState(false);
   const [currentFruitIndex, setCurrentFruitIndex] = useState(0);
-
+  const [language, setLanguage] = useState('english'); // Initial language
+  const languages = {
+    english: {
+      heading: 'Simple Add',
+      sub:'Add the following numbers',
+      highScoreText: 'High Score',
+      scoreText: 'Score',
+      lang:'Language',
+      // Add more language-specific content as needed
+    },
+    hindi: {
+      heading: 'सरल जोड़',
+      sub:'निम्नलिखित संख्याओं को जोड़ें',
+      highScoreText: 'उच्च स्कोर',
+      scoreText: 'स्कोर',
+      lang:'भाषा',
+      // Add more language-specific content as needed
+    },
+    bengali: {
+      heading: 'সহজ যোগ',
+      sub:'নিম্নলিখিত সংখ্যাগুলি যোগ করুন',
+      highScoreText: 'উচ্চ স্কোর',
+      scoreText: 'স্কোর',
+      lang:'ভাষা',
+    }
+    // Add more languages as needed
+  };
+  const handleLanguageChange = (selectedLanguage) => {
+    setLanguage(selectedLanguage);
+  };
   useEffect(() => {
     const savedHighScore = parseInt(sessionStorage.getItem('highScore'), 10) || 0;
     setHighScore(savedHighScore);
@@ -48,7 +76,6 @@ const SimpleAdd = ({ isBackgroundColorChanged, handleBackgroundColorChange }) =>
   const generateRandomNumbers = () => {
     const newRangeStart = rangeEnd + 1;
     const newRangeEnd = newRangeStart + 4;
-    setRangeStart(newRangeStart);
     setRangeEnd(newRangeEnd);
 
     const newNum1 = Math.floor(Math.random() * 30) + 1
@@ -114,13 +141,23 @@ const SimpleAdd = ({ isBackgroundColorChanged, handleBackgroundColorChange }) =>
   useEffect(() => {
     generateRandomNumbers();
   }, []);
-
+  const languageContent = languages[language];
   return (
     <div id="simple_addition" className={`container-style ${isBackgroundColorChanged ? 'background-changed' : ''} ${isBackgroundColorChanged ? 'cool-style-disabled' : 'cool-style'}`}>
-      <h2 className='score1'>Normal Score: {normalScore}</h2> <h2 className='score1'>High Score: {highScore}</h2>
-      <h1 id="text1" className="font-style">Simple Add</h1>
+                   <div className="dropdown settings4">
+        <button className="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+         {languageContent.lang}
+        </button>
+        <ul className="dropdown-menu">
+          <li><button className="dropdown-item" onClick={() => handleLanguageChange('english')}>English</button></li>
+          <li><button className="dropdown-item" onClick={() => handleLanguageChange('hindi')}>Hindi</button></li>
+          <li><button className="dropdown-item" onClick={() => handleLanguageChange('bengali')}>Bengali</button></li>
+        </ul>
+      </div>
+      <h2 className='score1'>{languageContent.scoreText}: {normalScore}</h2> <h2 className='score1'>{languageContent.highScoreText}: {highScore}</h2>
+      <h1 id="text1" className="font-style">{languageContent.heading}</h1>
       <center>
-        <h2 id="text2" className='type'>Add the following numbers:</h2>
+        <h2 id="text2" className='type'>{languageContent.sub}:</h2>
       </center>
       <div className="apple-container">
         <div className="box">
@@ -154,5 +191,8 @@ const SimpleAdd = ({ isBackgroundColorChanged, handleBackgroundColorChange }) =>
     </div>
   );
 };
-
+SimpleAdd.propTypes = {
+  isBackgroundColorChanged: PropTypes.bool.isRequired,
+  handleBackgroundColorChange: PropTypes.func.isRequired
+};
 export default SimpleAdd;

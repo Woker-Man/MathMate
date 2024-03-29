@@ -7,8 +7,13 @@ body {
 .container {
     position: relative;
 }
+.settings{
+  position: relative;
+  left:-650px;
+  top: -275px;
+}
 #basket {
-    width: 120px;
+    width: 150px;
     height: 120px;
     /* background-color: yellow; */
     position: absolute;
@@ -18,6 +23,7 @@ body {
     line-height: 100px;
     font-family:'Schoolbell', cursive;
     font-size:20px;
+    color: black;
     /* font-weight: bold; */
 }
 .cool-style {
@@ -54,13 +60,13 @@ body {
     left: 220px;
     text-align: center;
     /* line-height: 50px; */
-    font-size: 35px;
+    font-size: 50px;
     color: black;
     font-family: 'Schoolbell', cursive;
 }
 
 #highScore {
-    width: 250px;
+    width: 350px;
     height: 70px;
     /* background-color: #FFD700; */
     position: absolute;
@@ -68,7 +74,7 @@ body {
     left: 560px;
     text-align: center;
     /* line-height: 250px; */
-    font-size: 35px;
+    font-size: 50px;
     color: black;
     font-family: 'Schoolbell', cursive;
 }
@@ -155,7 +161,7 @@ body {
     height: 140px;
     position: absolute;
     top: 49px;
-    left: 1240px;
+    left: 1256px;
     cursor: pointer;
   }
 
