@@ -15,6 +15,10 @@ const DragDropAdd = ({ isBackgroundColorChanged}) => {
   function shuffleSymbols() {
     symbols.sort(() => Math.random() - 0.5);
   }
+  const speak = (text) => {
+    const utterance = new SpeechSynthesisUtterance(text);
+    window.speechSynthesis.speak(utterance);
+  };
   const languages = {
     english: {
       submitButton: 'Submit',
@@ -43,6 +47,7 @@ const DragDropAdd = ({ isBackgroundColorChanged}) => {
   };
   const handleLanguageChange = (selectedLanguage) => {
     setLanguage(selectedLanguage);
+    // resetGame();
   };
 
   const containerStyle = {
@@ -143,11 +148,10 @@ const DragDropAdd = ({ isBackgroundColorChanged}) => {
     shuffleSymbols();
 
     maxTargetCount = Math.floor(Math.random() * 14) + 2;
-    // document.getElementById("maxTarget").textContent = "Max Target: " + maxTargetCount;
+
 
     var targetCount1 = Math.floor(Math.random() * (maxTargetCount - 1)) + 1;
     var targetCount2 = maxTargetCount - targetCount1;
-
     var box3 = document.getElementById("box3");
     box3.innerHTML = "";
     var box2 = document.getElementById("box2");
@@ -165,7 +169,10 @@ const DragDropAdd = ({ isBackgroundColorChanged}) => {
   }
  
   function submitAnswer() {
+    console.log(basketCounter);
+    console.log("M"+maxTargetCount);
     if (basketCounter === maxTargetCount) {
+      speak('correct Answer');
       currentSymbolIndex = (currentSymbolIndex + 1) % 5;
       // document.getElementById("symbol").textContent = "index: " + currentSymbolIndex;
 
@@ -200,6 +207,7 @@ const DragDropAdd = ({ isBackgroundColorChanged}) => {
       displayTemporaryMessage("Correct Answer");
       resetGame();
     } else {
+      speak('Wrong Answer')
       currentSymbolIndex = 0;
       targetFruit = "apple";
       // document.getElementById("symbol").textContent = "index: " + currentSymbolIndex;
@@ -237,7 +245,7 @@ const DragDropAdd = ({ isBackgroundColorChanged}) => {
   const languageContent = languages[language];
   return (
     <div id="content-container" className={`container-style ${isBackgroundColorChanged ? 'background-changed' : ''} ${isBackgroundColorChanged ? 'cool-style-disabled' : 'cool-style'}`} style={isBackgroundColorChanged ? null : containerStyle}>
-             <div className="dropdown settings">
+             {/* <div className="dropdown settings">
         <button className="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
          {languageContent.lang}
         </button>
@@ -246,7 +254,7 @@ const DragDropAdd = ({ isBackgroundColorChanged}) => {
           <li><button className="dropdown-item" onClick={() => handleLanguageChange('hindi')}>Hindi</button></li>
           <li><button className="dropdown-item" onClick={() => handleLanguageChange('bengali')}>Bengali</button></li>
         </ul>
-      </div>
+      </div> */}
       <div className="container" id="basket">
       
       {languageContent.basketText}: 0

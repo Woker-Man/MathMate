@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import './styles/Statement.css';
 import PropTypes from 'prop-types';
+import { useEffect} from 'react';
 // import { addition as additionArray, subtraction as subtractionArray, multiplication as multiplicationArray, division as divisionArray } from './ProblemStatements';
 
 function getRandomNumber(min, max) {
@@ -115,6 +116,38 @@ const divisionArrayBengali = [
   const [feedbackMessage, setFeedbackMessage] = useState('');
   const [correctResult, setCorrectResult] = useState(null);
   const [language, setLanguage] = useState('english'); // Initial language
+  const [voices, setVoices] = useState([]);
+  useEffect(() => {
+    const loadVoices = () => {
+      const availableVoices = window.speechSynthesis.getVoices();
+      setVoices(availableVoices);
+    };
+
+    // Load voices and listen for changes
+    loadVoices();
+    window.speechSynthesis.onvoiceschanged = loadVoices;
+  }, []);
+  function stopSpeaking() {
+    if (window.speechSynthesis) {
+      window.speechSynthesis.cancel();
+    }
+  }
+  
+  const speak = (text) => {
+    const utterance = new SpeechSynthesisUtterance(text);
+    var selectedLang="en-US"
+    if(language=="english")selectedLang="en-US";
+    else if(language=="hindi")selectedLang="hi-IN";
+    else selectedLang="bn-IN";
+    utterance.lang = selectedLang;
+    const selectedVoice = voices.find(voice => voice.lang === selectedLang);
+
+    if (selectedVoice) {
+      utterance.voice = selectedVoice;
+    }
+
+    window.speechSynthesis.speak(utterance);
+  };
   const languages = {
     english: {
       font:'Font Size',
@@ -148,6 +181,7 @@ const divisionArrayBengali = [
     setFontSize(prevSize => Math.max(12, prevSize - 4)); // Decrease font size by 4, minimum 12
   };
  const  handleLanguageChange = (selectedLanguage) => {
+  stopSpeaking();
     setLanguage(selectedLanguage);
     const functions = Object.values(getLanguageFunctions(selectedLanguage));
     const randomFunction = functions[Math.floor(Math.random() * functions.length)];
@@ -166,6 +200,7 @@ const divisionArrayBengali = [
   };
   function handleSubmit(e) {
     e.preventDefault();
+    stopSpeaking();
     if (parseInt(userAnswer, 10) === correctResult) {
       setFeedbackMessage('Correct! Moving to the next question.');
       setTimeout(() => {
@@ -335,9 +370,11 @@ function divisionBengali() {
 }
 // Now, you can select the appropriate functions based on the selected language
 const start = () => {
+  stopSpeaking();
   const functions = Object.values(getLanguageFunctions(language));
   const randomFunction = functions[Math.floor(Math.random() * functions.length)];
   const { statement, result } = randomFunction();
+  speak(statement)
   setDisplayedStatement(statement);
   setUserAnswer('');
   setFeedbackMessage('');

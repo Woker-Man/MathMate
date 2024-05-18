@@ -45,7 +45,10 @@ const DragDropSub = ({ isBackgroundColorChanged}) => {
   const handleLanguageChange = (selectedLanguage) => {
     setLanguage(selectedLanguage);
   };
-
+  const speak = (text) => {
+    const utterance = new SpeechSynthesisUtterance(text);
+    window.speechSynthesis.speak(utterance);
+  };
   const containerStyle = {
     backgroundImage: 'url("https://static.vecteezy.com/system/resources/previews/000/550/499/original/cartoon-forest-hill-landscape-vector-nature-background-illustration.jpg")',
     backgroundSize: 'cover',
@@ -169,6 +172,7 @@ const DragDropSub = ({ isBackgroundColorChanged}) => {
 
   function submitAnswer() {
     if (basketCounter === maxTargetCount) {
+      speak('correct Answer');
       currentSymbolIndex = (currentSymbolIndex + 1) % 5;
       // document.getElementById("symbol").textContent = "index: " + currentSymbolIndex;
 
@@ -196,6 +200,7 @@ const DragDropSub = ({ isBackgroundColorChanged}) => {
 
       score = score + 10;
       if (score >= highScore) {
+       
         highScore = score;
         document.getElementById("highScore").textContent = "highScore: " + highScore;
       }
@@ -203,6 +208,7 @@ const DragDropSub = ({ isBackgroundColorChanged}) => {
       displayTemporaryMessage("Correct Answer");
       resetGame();
     } else {
+      speak('Wrong Answer');
       currentSymbolIndex = 0;
       targetFruit = "apple";
       // document.getElementById("symbol").textContent = "index: " + currentSymbolIndex;
@@ -241,7 +247,7 @@ const DragDropSub = ({ isBackgroundColorChanged}) => {
   const languageContent = languages[language];
   return (
     <div className={`container-style ${isBackgroundColorChanged ? 'background-changed' : ''} ${isBackgroundColorChanged ? 'cool-style-disabled' : 'cool-style'}`} style={isBackgroundColorChanged ? null : containerStyle} >
-    <div className="dropdown settings">
+    {/* <div className="dropdown settings">
         <button className="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
          {languageContent.lang}
         </button>
@@ -250,7 +256,7 @@ const DragDropSub = ({ isBackgroundColorChanged}) => {
           <li><button className="dropdown-item" onClick={() => handleLanguageChange('hindi')}>Hindi</button></li>
           <li><button className="dropdown-item" onClick={() => handleLanguageChange('bengali')}>Bengali</button></li>
         </ul>
-      </div>
+      </div> */}
       <div className="container" id="basket">
       
       {languageContent.basketText}: 0

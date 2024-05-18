@@ -4,12 +4,19 @@ import './styles/Addition.css';
 function SubtractionPage() {
   const navigate = useNavigate();
 
+  const speak = (text) => {
+    const utterance = new SpeechSynthesisUtterance(text);
+    window.speechSynthesis.speak(utterance);
+  };
+
   const goToDragDropAdd = () => {
+    speak('Welcome to Drag Drop Subtract');
     // Use navigate('/dragDropAdd') to navigate to DragDropAdd Page
     navigate('/dragDropSub');
   };
 
   const goToSimpleAdd = () => {
+    speak('Welcome to Simple Add');
     // Use navigate('/simpleAdd') to navigate to SimpleAdd Page
     navigate('/simpleSub');
   };

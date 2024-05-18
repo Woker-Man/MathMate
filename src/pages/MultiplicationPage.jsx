@@ -4,12 +4,19 @@ import { useNavigate } from 'react-router-dom';
 function MultiplicationPage() {
   const navigate = useNavigate();
 
+  const speak = (text) => {
+    const utterance = new SpeechSynthesisUtterance(text);
+    window.speechSynthesis.speak(utterance);
+  };
+
   const goToDragDropAdd = () => {
+    speak('Welcome to Multiplication Rain');
     // Use navigate('/dragDropAdd') to navigate to DragDropAdd Page
     navigate('/MultiRain');
   };
 
   const goToSimpleAdd = () => {
+    speak('Welcome to Simple Multiplication');
     // Use navigate('/simpleAdd') to navigate to SimpleAdd Page
     navigate('/simpleMulti');
   };
