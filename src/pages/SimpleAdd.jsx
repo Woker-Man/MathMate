@@ -19,6 +19,38 @@ const SimpleAdd = ({ isBackgroundColorChanged }) => {
     const savedHighScore = parseInt(sessionStorage.getItem('highScore'), 10) || 0;
     return savedHighScore;
   });
+  const [voices, setVoices] = useState([]);
+  useEffect(() => {
+    const loadVoices = () => {
+      const availableVoices = window.speechSynthesis.getVoices();
+      setVoices(availableVoices);
+    };
+
+    // Load voices and listen for changes
+    loadVoices();
+    window.speechSynthesis.onvoiceschanged = loadVoices;
+  }, []);
+  function stopSpeaking() {
+    if (window.speechSynthesis) {
+      window.speechSynthesis.cancel();
+    }
+  }
+  
+  const speak = (text) => {
+    const utterance = new SpeechSynthesisUtterance(text);
+    var selectedLang="en-US"
+    if(language=="english")selectedLang="en-US";
+    else if(language=="hindi")selectedLang="hi-IN";
+    else selectedLang="bn-IN";
+    utterance.lang = selectedLang;
+    const selectedVoice = voices.find(voice => voice.lang === selectedLang);
+
+    if (selectedVoice) {
+      utterance.voice = selectedVoice;
+    }
+
+    window.speechSynthesis.speak(utterance);
+  };
   const [options, setOptions] = useState([]);
   const [animateWrong, setAnimateWrong] = useState(false);
   const [animateCorrect, setAnimateCorrect] = useState(false);
@@ -74,13 +106,14 @@ const SimpleAdd = ({ isBackgroundColorChanged }) => {
   }, [highScore]);
 
   const generateRandomNumbers = () => {
+    stopSpeaking();
     const newRangeStart = rangeEnd + 1;
     const newRangeEnd = newRangeStart + 4;
     setRangeEnd(newRangeEnd);
-
     const newNum1 = Math.floor(Math.random() * 30) + 1
     const newNum2 = Math.floor(Math.random() * 30) + 1
     const correctAnswer = newNum1 + newNum2;
+
     const a=correctAnswer-1;
     const b=correctAnswer-2;
     const c=correctAnswer+1;
@@ -88,6 +121,8 @@ const SimpleAdd = ({ isBackgroundColorChanged }) => {
 
     setNum1(newNum1);
     setNum2(newNum2);
+
+    speak(newNum1+"+"+newNum2);
     setUserAnswer('');
     setIsCorrect(null);
     setOptions(allOptions);
@@ -140,6 +175,7 @@ const SimpleAdd = ({ isBackgroundColorChanged }) => {
 
   useEffect(() => {
     generateRandomNumbers();
+    // stopSpeaking();
   }, []);
   const languageContent = languages[language];
   return (

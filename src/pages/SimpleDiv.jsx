@@ -21,6 +21,15 @@ const SimpleDiv= ({ isBackgroundColorChanged}) => {
     const savedHighScore = parseInt(sessionStorage.getItem('highScore'), 10) || 0;
     return savedHighScore;
   });
+  function stopSpeaking() {
+    if (window.speechSynthesis) {
+      window.speechSynthesis.cancel();
+    }
+  }
+  const speak = (text) => {
+    const utterance = new SpeechSynthesisUtterance(text);
+    window.speechSynthesis.speak(utterance);
+  };
   const [options, setOptions] = useState([]);
   const [animateWrong, setAnimateWrong] = useState(false);
   const [animateCorrect, setAnimateCorrect] = useState(false);
@@ -90,6 +99,7 @@ const SimpleDiv= ({ isBackgroundColorChanged}) => {
   }, [highScore]);
 
   const generateRandomNumbers = () => {
+    stopSpeaking();
     const newRangeStart = rangeEnd + 1;
     const newRangeEnd = newRangeStart + 4;
     setRangeEnd(newRangeEnd);
@@ -111,6 +121,7 @@ const SimpleDiv= ({ isBackgroundColorChanged}) => {
 
     setNum1(newNum1);
     setNum2(newNum2);
+    speak(newNum1*newNum2+"divided by"+newNum2);
     setUserAnswer('');
     setIsCorrect(null);
     setOptions(allOptions);
